@@ -11,7 +11,7 @@ namespace PRG2Assignment
         private string roomType;
         private string roomNumber;
         private string bedConfiguration;
-        private int dailyRate;
+        private double dailyRate;
         private bool isAvail;
         private int noOfOccupants;
 
@@ -33,7 +33,7 @@ namespace PRG2Assignment
             set { bedConfiguration = value; }
         }
 
-        public int DailyRate
+        public double DailyRate
         {
             get { return dailyRate; }
             set { dailyRate = value; }
@@ -53,13 +53,14 @@ namespace PRG2Assignment
 
         public HotelRoom() { }
 
-        public HotelRoom(string rt, string rn, string bc, int dr, bool ia) //No of occupants not stated to be included inside word doc?
+        public HotelRoom(string rt, string rn, string bc, double dr, bool ia, int no) //No of occupants not stated to be included inside word doc?
         {
             roomType = rt;
             roomNumber = rn;
             bedConfiguration = bc;
             dailyRate = dr;
             isAvail = ia;
+            noOfOccupants = no;
         }
 
         public abstract double CalculateCharges(); //This is abstract therefore empty, right?

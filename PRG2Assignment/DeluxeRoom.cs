@@ -18,9 +18,9 @@ namespace PRG2Assignment
 
         public DeluxeRoom() : base() { }
 
-        public DeluxeRoom(string rt, string rn, string bc, double dr, bool ia, bool ab) : base(rt, rn, bc, dr, ia)
+        public DeluxeRoom(string rt, string rn, string bc, double dr, bool ia, int no, bool ab) : base(rt, rn, bc, dr, ia, no)
         {
-            additionalBed = ia;
+            additionalBed = ab;
         }
 
         public override double CalculateCharges()

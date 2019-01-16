@@ -25,7 +25,7 @@ namespace PRG2Assignment
 
         public StandardRoom() : base() { }
 
-        public StandardRoom(string rt, string rn, string bc, int dr, bool ia, bool rw, bool rb) : base(rt, rn, bc, dr, ia) //Not sure if done right
+        public StandardRoom(string rt, string rn, string bc, int dr, bool ia, int no, bool rw, bool rb) : base(rt, rn, bc, dr, ia, no) //Not sure if done right
         {
             requireWifi = rw;
             requireBreakfast = rb;
