@@ -43,9 +43,9 @@ namespace PRG2Assignment
             roomList.Add(room);
         }
 
-        public void CalculateTotal() //Empty for now so its left as a void
+        public double CalculateTotal() //Empty for now so its left as a void
         {
-
+            return 0;
         }
 
         public override string ToString()

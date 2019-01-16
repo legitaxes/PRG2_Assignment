@@ -25,7 +25,7 @@ namespace PRG2Assignment
 
         public override double CalculateCharges()
         {
-
+            return 0;
         }
 
         public override string ToString()
