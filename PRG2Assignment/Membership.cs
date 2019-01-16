@@ -38,7 +38,7 @@ namespace PRG2Assignment
 
         public override string ToString()
         {
-            return "\n" + status + "\t" + points + "\n"; //wakarimasen lol
+            return status + "\t" + points + "\n"; //wakarimasen lol
         }
     }
 }

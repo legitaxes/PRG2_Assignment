@@ -35,5 +35,10 @@ namespace PRG2Assignment
         {
             return 0; //temporary return value until we actually do the method
         }
+
+        public override string ToString()
+        {
+            return base.ToString() + "\t" + requireWifi + "\t" + requireBreakfast;
+        }
     }
 }

@@ -50,7 +50,7 @@ namespace PRG2Assignment
 
         public override string ToString()
         {
-            return "\n" + checkInDate + "\t" + checkOutDate + "\n"; //wakarimasen lol
+            return checkInDate + "\t" + checkOutDate + "\n"; //wakarimasen lol
         }
     }
 }

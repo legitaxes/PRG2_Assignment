@@ -66,7 +66,7 @@ namespace PRG2Assignment
 
         public override string ToString()
         {
-            return "\n" + roomType + "\t" + roomNumber + "\t" + bedConfiguration + "\t" + dailyRate + "\n"; //wakarimasen lol
+            return roomType + "\t" + roomNumber + "\t" + bedConfiguration + "\t" + dailyRate + "\n"; //wakarimasen lol
         }
     }
 }
