@@ -31,9 +31,9 @@ namespace PRG2Assignment
             points = p;
         }
 
-        public double EarnPoints() //Left as void and blank as it will be done later
+        public void EarnPoints(double p) //Left as void and blank as it will be done later
         {
-            return 0;
+           
         }
 
         public bool RedeemPoints(int p)
