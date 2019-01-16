@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PRG2Assignment
 {
-    class DeluxeRoom
+    class DeluxeRoom : HotelRoom
     {
         private bool additionalBed;
 
@@ -18,6 +18,19 @@ namespace PRG2Assignment
 
         public DeluxeRoom() : base() { }
 
-        //Legit not sure how to do this .cs
+        public DeluxeRoom(string rt, string rn, string bc, double dr, bool ia, bool ab) : base(rt, rn, bc, dr, ia)
+        {
+            additionalBed = ia;
+        }
+
+        public override double CalculateCharges()
+        {
+
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + "\t" + additionalBed;
+        }
     }
 }
