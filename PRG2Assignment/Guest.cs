@@ -50,13 +50,13 @@ namespace PRG2Assignment
         {
             name = n;
             ppNumber = ppn;
-            HotelStay = s; // is HotelStay and Membership correct? It's supposed to be both capital just like in public Stay HotelStay
-            Membership = m;
+            hotelStay = s; // is HotelStay and Membership correct? It's supposed to be both capital just like in public Stay HotelStay
+            membership = m;
         }
 
         public override string ToString()
         {
-            return "\n" + name + "\t" + ppNumber + "\t" + hotelStay + "\t" + membership + "\t" + "\n"; //wakarimasen lol
+            return name + "\t" + ppNumber + "\t" + hotelStay + "\t" + membership + "\t" + "\n"; //wakarimasen lol
         }
     }
 }
