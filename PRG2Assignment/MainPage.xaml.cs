@@ -108,8 +108,28 @@ namespace PRG2Assignment
 
         private void addRoomBtn_Click(object sender, RoutedEventArgs e)
         {
+            double p = 0;
             HotelRoom r = (HotelRoom)lvAvailableRooms.SelectedItem;
-            List<Object> tempRoomList = new List<Object>();
+            if (r.RoomType == "Standard")
+            {
+                if (addWifiCheckBox.IsChecked == true)
+                {
+                    p += 10;
+                }
+                if (addBreakfastCheckBox.IsChecked == true)
+                {
+                    p += 20;
+                }
+            }
+            else if (r.RoomType == "Deluxe")
+            {
+                if (addBedCheckBox.IsChecked == true)
+                {
+                    p = 25;
+                }
+            }
+            r.DailyRate += p;
+            List<HotelRoom> tempRoomList = new List<HotelRoom>();
             tempRoomList.Add(r);
             lvRoomsSelected.ItemsSource = tempRoomList;
         }
