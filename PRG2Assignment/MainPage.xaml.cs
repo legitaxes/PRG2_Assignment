@@ -168,6 +168,26 @@ namespace PRG2Assignment
             {
                 availableRooms.Add(r);
             }
+            if (r.RoomType == "Standard") //check for standard or deluxe and allow which checkbox to be checked [2.1.3]
+            {
+                if (addWifiCheckBox.IsChecked == true)
+                {
+                    r.DailyRate = r.DailyRate - 10;
+                }
+                if (addBreakfastCheckBox.IsChecked == true)
+                {
+                    r.DailyRate = r.DailyRate - 20;
+                }
+            }
+            else if (r.RoomType == "Deluxe")
+            {
+                if (addBedCheckBox.IsChecked == true)
+                {
+                    r.DailyRate = r.DailyRate - 25;
+                }
+            }
+
+
             tempRoomList.Remove(r);
             RefreshList();
         }
