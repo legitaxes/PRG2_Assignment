@@ -25,13 +25,13 @@ namespace PRG2Assignment
         //global lists
         List<HotelRoom> roomList = new List<HotelRoom>();
         List<Guest> guestList = new List<Guest>();
+        List<HotelRoom> availableRooms = new List<HotelRoom>();
         List<HotelRoom> tempRoomList = new List<HotelRoom>();
 
         public MainPage()
         {
             this.InitializeComponent();
             InitHotelRooms();
-            InitRooms();
             InitGuests();
 
         }
@@ -88,12 +88,13 @@ namespace PRG2Assignment
             roomList.Add(room10);
             roomList.Add(room11);
         }
-        public void InitRooms() {
-            List<HotelRoom> availableRooms = new List<HotelRoom>();
+        //load roomList
+        public void InitRooms() { 
             foreach (HotelRoom room in roomList)
             {
-                if (room.IsAvail == true)
+                if (room.IsAvail == true) //checks whether the room is available
                 {
+                    room.IsAvail = false;
                     availableRooms.Add(room);
                 }
             }
@@ -103,10 +104,24 @@ namespace PRG2Assignment
         public void RefreshList() {
             lvRoomsSelected.ItemsSource = null;
             lvRoomsSelected.ItemsSource = tempRoomList;
+            lvAvailableRooms.ItemsSource = null;
+            InitRooms();
         }
 
         private void checkInBtn_Click(object sender, RoutedEventArgs e)
         {
+            foreach (Guest g in guestList)
+            {
+                if (guestTxt.Text != g.Name) //if guest.text cannot be found in the guestList.Name
+                {
+                    Stay s = new Stay(DateTime.Parse(checkInDatePicker.Date.ToString()), DateTime.Parse(checkOutDatePicker.Date.ToString()));
+                    Membership m = new Membership("Ordinary", 0);
+                    Guest guest = new Guest(guestTxt.Text, passportTxt.Text, s, m, false);
+                    guestList.Add(guest);
+                    InitRooms();
+                    RefreshList();
+                }
+            }
             foreach (HotelRoom room in lvAvailableRooms.Items)
             {
              
@@ -145,6 +160,11 @@ namespace PRG2Assignment
             HotelRoom r = (HotelRoom)lvRoomsSelected.SelectedItem;
             tempRoomList.Remove(r);
             RefreshList();
+        }
+
+        private void checkRoomsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            InitRooms();
         }
     }
 }

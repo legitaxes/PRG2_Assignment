@@ -43,7 +43,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="565,108,0,0" TextWrapping="Wrap" Text="Check Out:" VerticalAlignment="Top" Width="95" Height="32"/>
         <CalendarDatePicker x:Name="checkInDatePicker" HorizontalAlignment="Left" Margin="373,155,0,0" VerticalAlignment="Top" Width="178"/>
         <CalendarDatePicker x:Name="checkOutDatePicker" HorizontalAlignment="Left" Margin="565,153,0,0" VerticalAlignment="Top" Width="178"/>
-        <Button x:Name="checkRoomsBtn" Content="Check Rooms Available" HorizontalAlignment="Left" Margin="565,207,0,0" VerticalAlignment="Top" Height="52" Width="178"/>
+        <Button x:Name="checkRoomsBtn" Content="Check Rooms Available" HorizontalAlignment="Left" Margin="565,207,0,0" VerticalAlignment="Top" Height="52" Width="178" Click="checkRoomsBtn_Click"/>
         <TextBlock x:Name="memberStatusText" HorizontalAlignment="Left" Margin="796,37,0,0" TextWrapping="Wrap" Text="Member Status:" VerticalAlignment="Top"/>
         <TextBlock x:Name="pointsAvailableText" HorizontalAlignment="Left" Margin="796,64,0,0" TextWrapping="Wrap" Text="Points Available:" VerticalAlignment="Top"/>
         <Button x:Name="redeemPointsBtn" Content="Redeem Points" HorizontalAlignment="Left" Margin="894,202,0,0" VerticalAlignment="Top" Height="57" Width="124"/>
