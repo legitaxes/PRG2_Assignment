@@ -160,7 +160,7 @@ namespace PRG2Assignment
             RefreshList();
         }
 
-        private void removeRoomBtn_Click(object sender, RoutedEventArgs e)
+        private void removeRoomBtn_Click(object sender, RoutedEventArgs e) //removes the selected room from the selected listview [2.1.4]
         {
             HotelRoom r = (HotelRoom)lvRoomsSelected.SelectedItem;
             r.IsAvail = true;
