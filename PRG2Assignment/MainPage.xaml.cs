@@ -25,6 +25,11 @@ namespace PRG2Assignment
         public MainPage()
         {
             this.InitializeComponent();
+            InItHotelRooms();
+        }
+        public void InItHotelRooms()
+        {
+            HotelRoom room1 = new StandardRoom("Standard", "101,102", "Single", 90, false, 0);
         }
     }
 }
