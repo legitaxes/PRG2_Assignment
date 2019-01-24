@@ -31,9 +31,9 @@ namespace PRG2Assignment
         public MainPage()
         {
             this.InitializeComponent();
-            InitHotelRooms();
-            InitGuests();
-
+            InitHotelRooms(); //create room objects
+            InitGuests(); //create guest objects
+            CheckAvailability(); //checks for room that is available and put it into a list
         }
         public void InitGuests() {
             //first guest information
@@ -58,7 +58,7 @@ namespace PRG2Assignment
             guestList.Add(g2);
             guestList.Add(g3);
             guestList.Add(g4);
-        }
+        } //create guest objects
 
         public void InitHotelRooms()
         {
@@ -87,26 +87,30 @@ namespace PRG2Assignment
             roomList.Add(room9);
             roomList.Add(room10);
             roomList.Add(room11);
-        }
+        } //create room objects
 
-        //load roomList to availableroom List view
-        public void InitRooms() { 
+        public void CheckAvailability() {
             foreach (HotelRoom room in roomList)
             {
                 if (room.IsAvail == true) //checks whether the room is available
                 {
-                    room.IsAvail = false;
                     availableRooms.Add(room);
                 }
+                else if (room.IsAvail == false)
+                {
+                    availableRooms.Remove(room);
+                }
             }
-            lvAvailableRooms.ItemsSource = availableRooms;
+        }
+        //load roomList to availableroom List view
+        public void RefreshAvailableRoom() {
         }
 
         public void RefreshList() {
             lvRoomsSelected.ItemsSource = null;
             lvRoomsSelected.ItemsSource = tempRoomList;
             lvAvailableRooms.ItemsSource = null;
-            InitRooms();
+            lvAvailableRooms.ItemsSource = availableRooms;
         }
 
         private void checkInBtn_Click(object sender, RoutedEventArgs e)
@@ -119,7 +123,6 @@ namespace PRG2Assignment
                     Membership m = new Membership("Ordinary", 0);
                     Guest guest = new Guest(guestTxt.Text, passportTxt.Text, s, m, false);
                     guestList.Add(guest);
-                    InitRooms();
                     RefreshList();
                 }
             }
@@ -149,6 +152,10 @@ namespace PRG2Assignment
             }
             r.DailyRate += p;
             r.IsAvail = false;
+            if (r.IsAvail == false)
+            {
+                availableRooms.Remove(r);
+            }
             tempRoomList.Add(r);
             RefreshList();
         }
@@ -156,14 +163,18 @@ namespace PRG2Assignment
         private void removeRoomBtn_Click(object sender, RoutedEventArgs e)
         {
             HotelRoom r = (HotelRoom)lvRoomsSelected.SelectedItem;
+            r.IsAvail = true;
+            if (r.IsAvail == true) //checks whether the room is available
+            {
+                availableRooms.Add(r);
+            }
             tempRoomList.Remove(r);
-            roomList.Add(r);
             RefreshList();
         }
 
         private void checkRoomsBtn_Click(object sender, RoutedEventArgs e)
         {
-            InitRooms();
+            RefreshList();
         }
     }
 }
