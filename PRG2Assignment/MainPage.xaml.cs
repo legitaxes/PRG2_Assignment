@@ -132,7 +132,7 @@ namespace PRG2Assignment
         {
             double p = 0;
             HotelRoom r = (HotelRoom)lvAvailableRooms.SelectedItem;
-            if (r.RoomType == "Standard")
+            if (r.RoomType == "Standard") //check for standard or deluxe and allow which checkbox to be checked [2.1.3]
             {
                 if (addWifiCheckBox.IsChecked == true)
                 {
@@ -174,7 +174,7 @@ namespace PRG2Assignment
 
         private void checkRoomsBtn_Click(object sender, RoutedEventArgs e)
         {
-            RefreshList(); //loads available rooms into the availableroom listview
+            RefreshList(); //loads available rooms into the availableroom listview [2.1.2]
         }
     }
 }
