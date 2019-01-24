@@ -46,12 +46,13 @@ namespace PRG2Assignment
 
         public Guest() { }
 
-        public Guest(string n, string ppn, Stay s, Membership m) //word doc didnt state to put in the bool, so i left it out. not sure if thats right or wrong.
+        public Guest(string n, string ppn, Stay s, Membership m, bool i) //word doc didnt state to put in the bool, so i left it out. not sure if thats right or wrong.
         {
             name = n;
             ppNumber = ppn;
             hotelStay = s; // is HotelStay and Membership correct? It's supposed to be both capital just like in public Stay HotelStay
             membership = m;
+            isCheckedIn = i;
         }
 
         public override string ToString()

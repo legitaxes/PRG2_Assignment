@@ -24,13 +24,40 @@ namespace PRG2Assignment
     {
         //global lists
         List<HotelRoom> roomList = new List<HotelRoom>();
-
+        List<Guest> guestList = new List<Guest>();
         public MainPage()
         {
             this.InitializeComponent();
             InitHotelRooms();
             InitRooms();
+            InitGuests();
+
         }
+        public void InitGuests() {
+            //first guest information
+            Stay s1 = new Stay(Convert.ToDateTime("26-Jan-2019"), Convert.ToDateTime("02-Feb-2019"));
+            Membership m1 = new Membership("Gold", 280);
+            Guest g1 = new Guest("Amelia", "S1234567A", s1, m1, false);
+            //second guest information
+            Stay s2 = new Stay(Convert.ToDateTime("25-Jan-2019"), Convert.ToDateTime("31-Jan-2019"));
+            Membership m2 = new Membership("Ordinary", 0);
+            Guest g2 = new Guest("Bob", "G1234567A", s2, m2, false);
+            //third guest information
+            Stay s3 = new Stay(Convert.ToDateTime("01-Feb-2019"), Convert.ToDateTime("06-Feb-2019"));
+            Membership m3 = new Membership("Silver", 190);
+            Guest g3 = new Guest("Cody", "G234567A", s3, m3, false);
+            //fourth guest information
+            Stay s4 = new Stay(Convert.ToDateTime("28-Jan-2019"), Convert.ToDateTime("10-Feb-2019"));
+            Membership m4 = new Membership("Gold", 10);
+            Guest g4 = new Guest("Edda", "S3456789A", s4, m4, false);
+
+            //adding guest objects into guestList
+            guestList.Add(g1);
+            guestList.Add(g2);
+            guestList.Add(g3);
+            guestList.Add(g4);
+        }
+
         public void InitHotelRooms()
         {
             //standard room objects
@@ -69,6 +96,22 @@ namespace PRG2Assignment
                 }
             }
             lvAvailableRooms.ItemsSource = availableRooms;
+        }
+
+        private void checkInBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (HotelRoom room in lvAvailableRooms.Items)
+            {
+             
+            }
+        }
+
+        private void addRoomBtn_Click(object sender, RoutedEventArgs e)
+        {
+            HotelRoom r = (HotelRoom)lvAvailableRooms.SelectedItem;
+            List<Object> tempRoomList = new List<Object>();
+            tempRoomList.Add(r);
+            lvRoomsSelected.ItemsSource = tempRoomList;
         }
     }
 }
