@@ -25,6 +25,8 @@ namespace PRG2Assignment
         //global lists
         List<HotelRoom> roomList = new List<HotelRoom>();
         List<Guest> guestList = new List<Guest>();
+        List<HotelRoom> tempRoomList = new List<HotelRoom>();
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -98,6 +100,11 @@ namespace PRG2Assignment
             lvAvailableRooms.ItemsSource = availableRooms;
         }
 
+        public void RefreshList() {
+            lvRoomsSelected.ItemsSource = null;
+            lvRoomsSelected.ItemsSource = tempRoomList;
+        }
+
         private void checkInBtn_Click(object sender, RoutedEventArgs e)
         {
             foreach (HotelRoom room in lvAvailableRooms.Items)
@@ -129,9 +136,15 @@ namespace PRG2Assignment
                 }
             }
             r.DailyRate += p;
-            List<HotelRoom> tempRoomList = new List<HotelRoom>();
             tempRoomList.Add(r);
-            lvRoomsSelected.ItemsSource = tempRoomList;
+            RefreshList();
+        }
+
+        private void removeRoomBtn_Click(object sender, RoutedEventArgs e)
+        {
+            HotelRoom r = (HotelRoom)lvRoomsSelected.SelectedItem;
+            tempRoomList.Remove(r);
+            RefreshList();
         }
     }
 }
