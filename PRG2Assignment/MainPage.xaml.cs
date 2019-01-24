@@ -88,7 +88,8 @@ namespace PRG2Assignment
             roomList.Add(room10);
             roomList.Add(room11);
         }
-        //load roomList
+
+        //load roomList to availableroom List view
         public void InitRooms() { 
             foreach (HotelRoom room in roomList)
             {
@@ -122,10 +123,6 @@ namespace PRG2Assignment
                     RefreshList();
                 }
             }
-            foreach (HotelRoom room in lvAvailableRooms.Items)
-            {
-             
-            }
         }
 
         private void addRoomBtn_Click(object sender, RoutedEventArgs e)
@@ -151,6 +148,7 @@ namespace PRG2Assignment
                 }
             }
             r.DailyRate += p;
+            r.IsAvail = false;
             tempRoomList.Add(r);
             RefreshList();
         }
@@ -159,6 +157,7 @@ namespace PRG2Assignment
         {
             HotelRoom r = (HotelRoom)lvRoomsSelected.SelectedItem;
             tempRoomList.Remove(r);
+            roomList.Add(r);
             RefreshList();
         }
 
