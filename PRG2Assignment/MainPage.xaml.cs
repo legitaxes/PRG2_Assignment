@@ -174,7 +174,7 @@ namespace PRG2Assignment
 
         private void checkRoomsBtn_Click(object sender, RoutedEventArgs e)
         {
-            RefreshList();
+            RefreshList(); //loads available rooms into the availableroom listview
         }
     }
 }
