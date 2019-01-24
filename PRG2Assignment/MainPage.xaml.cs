@@ -29,6 +29,7 @@ namespace PRG2Assignment
         }
         public void InItHotelRooms()
         {
+            //standard room objects
             HotelRoom room1 = new StandardRoom("Standard", "101", "Single", 90, true, 0);
             HotelRoom room2 = new StandardRoom("Standard", "102", "Single", 90, true, 0);
             HotelRoom room3 = new StandardRoom("Standard", "201", "Twin", 110, true, 0);
@@ -36,6 +37,11 @@ namespace PRG2Assignment
             HotelRoom room5 = new StandardRoom("Standard", "203", "Twin", 110, true, 0);
             HotelRoom room6 = new StandardRoom("Standard", "301", "Triple", 120, true, 0);
             HotelRoom room7 = new StandardRoom("Standard", "302", "Triple", 120, true, 0);
+            //deluxe room objects
+            HotelRoom room8 = new DeluxeRoom("Deluxe", "204", "Twin", 140, true, 0);
+            HotelRoom room9 = new DeluxeRoom("Deluxe", "205", "Twin", 140, true, 0);
+            HotelRoom room10 = new DeluxeRoom("Deluxe", "303", "Triple", 210, true, 0);
+            HotelRoom room11 = new DeluxeRoom("Deluxe", "304", "Triple", 210, true, 0);
 
         }
     }
