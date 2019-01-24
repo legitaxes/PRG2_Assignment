@@ -29,7 +29,14 @@ namespace PRG2Assignment
         }
         public void InItHotelRooms()
         {
-            HotelRoom room1 = new StandardRoom("Standard", "101,102", "Single", 90, false, 0);
+            HotelRoom room1 = new StandardRoom("Standard", "101", "Single", 90, true, 0);
+            HotelRoom room2 = new StandardRoom("Standard", "102", "Single", 90, true, 0);
+            HotelRoom room3 = new StandardRoom("Standard", "201", "Twin", 110, true, 0);
+            HotelRoom room4 = new StandardRoom("Standard", "202", "Twin", 110, true, 0);
+            HotelRoom room5 = new StandardRoom("Standard", "203", "Twin", 110, true, 0);
+            HotelRoom room6 = new StandardRoom("Standard", "301", "Triple", 120, true, 0);
+            HotelRoom room7 = new StandardRoom("Standard", "302", "Triple", 120, true, 0);
+
         }
     }
 }
