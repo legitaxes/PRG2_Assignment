@@ -23,16 +23,16 @@ namespace PRG2Assignment
     public sealed partial class MainPage : Page
     {
         //global lists
-        List<HotelRoom> roomList = new List<HotelRoom>();
-        List<Guest> guestList = new List<Guest>();
-        List<HotelRoom> availableRooms = new List<HotelRoom>();
-        List<HotelRoom> tempRoomList = new List<HotelRoom>();
+        List<HotelRoom> roomList = new List<HotelRoom>(); //stores all the room objects
+        List<Guest> guestList = new List<Guest>(); //stores all the guests objects
+        List<HotelRoom> availableRooms = new List<HotelRoom>(); //stores all the available room objects
+        List<HotelRoom> tempRoomList = new List<HotelRoom>(); //stores selected room objects
 
         public MainPage()
         {
             this.InitializeComponent();
-            InitHotelRooms(); //create room objects
-            InitGuests(); //create guest objects
+            InitHotelRooms(); //create room objects and stores into roomList 
+            InitGuests(); //create guest objects and stores into guestList
             CheckAvailability(); //checks for room that is available and put it into a list
         }
         public void InitGuests() {
@@ -92,18 +92,15 @@ namespace PRG2Assignment
         public void CheckAvailability() {
             foreach (HotelRoom room in roomList)
             {
-                if (room.IsAvail == true) //checks whether the room is available
+                if (room.IsAvail == true) //checks whether the room is available if it is, add it into available list
                 {
                     availableRooms.Add(room);
                 }
-                else if (room.IsAvail == false)
+                else if (room.IsAvail == false) 
                 {
                     availableRooms.Remove(room);
                 }
             }
-        }
-        //load roomList to availableroom List view
-        public void RefreshAvailableRoom() {
         }
 
         public void RefreshList() {
@@ -115,16 +112,21 @@ namespace PRG2Assignment
 
         private void checkInBtn_Click(object sender, RoutedEventArgs e)
         {
+            bool check = false;
             foreach (Guest g in guestList)
             {
                 if (guestTxt.Text != g.Name) //if guest.text cannot be found in the guestList.Name
                 {
-                    Stay s = new Stay(DateTime.Parse(checkInDatePicker.Date.ToString()), DateTime.Parse(checkOutDatePicker.Date.ToString()));
-                    Membership m = new Membership("Ordinary", 0);
-                    Guest guest = new Guest(guestTxt.Text, passportTxt.Text, s, m, false);
-                    guestList.Add(guest);
-                    RefreshList();
+                    check = true;
                 }
+            }
+            if (check == true)
+            {
+                Stay s = new Stay(DateTime.Parse(checkInDatePicker.Date.ToString()), DateTime.Parse(checkOutDatePicker.Date.ToString()));
+                Membership m = new Membership("Ordinary", 0);
+                Guest guest = new Guest(guestTxt.Text, passportTxt.Text, s, m, false);
+                guestList.Add(guest);
+                RefreshList();
             }
         }
 
@@ -186,8 +188,6 @@ namespace PRG2Assignment
                     r.DailyRate = r.DailyRate - 25;
                 }
             }
-
-
             tempRoomList.Remove(r);
             RefreshList();
         }
