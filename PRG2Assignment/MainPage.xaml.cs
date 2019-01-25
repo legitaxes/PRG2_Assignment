@@ -127,6 +127,11 @@ namespace PRG2Assignment
                 Guest guest = new Guest(guestTxt.Text, passportTxt.Text, s, m, false);
                 guestList.Add(guest);
                 RefreshList();
+                // to be done: remove the selected room(s) from its available room list and 'give' it to the guest and display a check-in successful message [2.1.5]
+            }
+            else if (check == false)
+            {
+                //put a message by welcoming the user back and 'give' the selected room(s) to this guest and display another message saying check-in is successful
             }
         }
 
