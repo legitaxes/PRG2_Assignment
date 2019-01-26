@@ -256,6 +256,7 @@ namespace PRG2Assignment
                 {
                     if (guest.Name == guestTxt.Text)
                     {
+                        availableTxt.Text = guest.Name + "'s" + guest.PPNumber;
                         lvAvailableRooms.ItemsSource = guest.HotelStay.RoomList;
                     }
                     else if (guest.PPNumber == passportTxt.Text)

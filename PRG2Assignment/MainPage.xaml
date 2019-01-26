@@ -44,7 +44,7 @@
         <Button x:Name="checkOutBtn" Content="Check-Out" HorizontalAlignment="Left" Margin="1207,581,0,0" VerticalAlignment="Top" Width="209" Height="70" Click="CheckOutBtn_Click"/>
         <TextBox x:Name="noOfAdultTxt" HorizontalAlignment="Left" Margin="294,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="28" Height="50"/>
         <TextBox x:Name="noOfChildrentxt" HorizontalAlignment="Left" Margin="294,176,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="28" Height="50"/>
-        <TextBlock HorizontalAlignment="Left" Margin="36,294,0,0" TextWrapping="Wrap" Text="Available rooms:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="availableTxt" HorizontalAlignment="Left" Margin="36,294,0,0" TextWrapping="Wrap" Text="Available rooms:" VerticalAlignment="Top"/>
 
     </Grid>
 </Page>
