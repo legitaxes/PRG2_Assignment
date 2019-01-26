@@ -232,5 +232,60 @@ namespace PRG2Assignment
         {
             RefreshList(); //loads available rooms into the availableroom listview [2.1.2]
         }
+
+        private void SearchBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (guestTxt.Text != "" || guestTxt.Text != " ")
+            {
+                if (passportTxt.Text == "")
+                { 
+                    foreach(Guest guest in guestList)
+                    {
+                        if (guest.Name == guestTxt.Text)
+                        {
+                            passportTxt.Text = roomList[0].ToString(); ;
+                        }
+                    }
+                }
+                
+                else
+                {
+                    guestTxt.Text = "n";
+                    passportTxt.Text = "n";
+                }
+            }
+
+            else if (passportTxt.Text != "" || passportTxt.Text != " ")
+            {
+                if (guestTxt.Text == "")
+                {
+                    foreach(Guest guest in guestList)
+                    {
+                        if (guest.PPNumber == passportTxt.Text)
+                        {
+
+                        }
+                    }
+                }
+
+                else
+                {
+                    guestTxt.Text = "n";
+                    passportTxt.Text = "n";
+                }
+            }
+
+            else
+            {
+
+            }
+        }
+
+        private void CheckOutBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
     }
 }
