@@ -27,7 +27,6 @@ namespace PRG2Assignment
         List<Guest> guestList = new List<Guest>(); //stores all the guests objects
         List<HotelRoom> availableRooms = new List<HotelRoom>(); //stores all the available room objects
         List<HotelRoom> tempRoomList = new List<HotelRoom>(); //stores selected room objects
-        List<Stay> roomList = new List<Stay>(); //stores all stay information
 
         public MainPage()
         {
@@ -60,10 +59,6 @@ namespace PRG2Assignment
             guestList.Add(g2);
             guestList.Add(g3);
             guestList.Add(g4);
-            roomList.Add(s1);
-            roomList.Add(s2);
-            roomList.Add(s3);
-            roomList.Add(s4);
         } //create guest objects
 
         public void InitHotelRooms() //create room objects
