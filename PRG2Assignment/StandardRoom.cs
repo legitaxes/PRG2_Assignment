@@ -25,7 +25,7 @@ namespace PRG2Assignment
 
         public StandardRoom() : base() { }
 
-        public StandardRoom(string rt, string rn, string bc, int dr, bool ia, int no) : base(rt, rn, bc, dr, ia, no){}
+        public StandardRoom(string rt, string rn, string bc, double dr, bool ia, int no) : base(rt, rn, bc, dr, ia, no){}
 
         public override double CalculateCharges() //temporary return value until we actually do the method
         {

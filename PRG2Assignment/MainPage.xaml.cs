@@ -23,7 +23,7 @@ namespace PRG2Assignment
     public sealed partial class MainPage : Page
     {
         //global lists
-        List<HotelRoom> roomList = new List<HotelRoom>(); //stores all the room objects
+        List<HotelRoom> hotelList = new List<HotelRoom>(); //stores all the hotel objects
         List<Guest> guestList = new List<Guest>(); //stores all the guests objects
         List<HotelRoom> availableRooms = new List<HotelRoom>(); //stores all the available room objects
         List<HotelRoom> tempRoomList = new List<HotelRoom>(); //stores selected room objects
@@ -31,10 +31,11 @@ namespace PRG2Assignment
         public MainPage()
         {
             this.InitializeComponent();
-            InitHotelRooms(); //create room objects and stores into roomList 
+            InitHotelRooms(); //create room objects and stores into hotelList 
             InitGuests(); //create guest objects and stores into guestList
             CheckAvailability(); //checks for room that is available and put it into a list
         }
+
         public void InitGuests() {
             //first guest information
             Stay s1 = new Stay(Convert.ToDateTime("26-Jan-2019"), Convert.ToDateTime("02-Feb-2019"));
@@ -60,7 +61,7 @@ namespace PRG2Assignment
             guestList.Add(g4);
         } //create guest objects
 
-        public void InitHotelRooms()
+        public void InitHotelRooms() //create room objects
         {
             //standard room objects
             HotelRoom room1 = new StandardRoom("Standard", "101", "Single", 90, false, 0);
@@ -75,24 +76,24 @@ namespace PRG2Assignment
             HotelRoom room9 = new DeluxeRoom("Deluxe", "205", "Twin", 140, true, 0);
             HotelRoom room10 = new DeluxeRoom("Deluxe", "303", "Triple", 210, false, 0);
             HotelRoom room11 = new DeluxeRoom("Deluxe", "304", "Triple", 210, true, 0);
-            //adding to roomList
-            roomList.Add(room1);
-            roomList.Add(room2);
-            roomList.Add(room3);
-            roomList.Add(room4);
-            roomList.Add(room5);
-            roomList.Add(room6);
-            roomList.Add(room7);
-            roomList.Add(room8);
-            roomList.Add(room9);
-            roomList.Add(room10);
-            roomList.Add(room11);
-        } //create room objects
+            //adding to hotelList
+            hotelList.Add(room1);
+            hotelList.Add(room2);
+            hotelList.Add(room3);
+            hotelList.Add(room4);
+            hotelList.Add(room5);
+            hotelList.Add(room6);
+            hotelList.Add(room7);
+            hotelList.Add(room8);
+            hotelList.Add(room9);
+            hotelList.Add(room10);
+            hotelList.Add(room11);
+        } 
 
         public void CheckAvailability() {
-            foreach (HotelRoom room in roomList)
+            foreach (HotelRoom room in hotelList)
             {
-                if (room.IsAvail == true) //checks whether the room is available if it is, add it into available list
+                if (room.IsAvail == true) //checks whether the room is available if it is, add it into available list which is use to be displayed on the listview
                 {
                     availableRooms.Add(room);
                 }
@@ -101,14 +102,14 @@ namespace PRG2Assignment
                     availableRooms.Remove(room);
                 }
             }
-        }
+        } //uses a foreach loop to filter for rooms that are available
 
-        public void RefreshList() {
+        public void RefreshList() { //updates the listview
             lvRoomsSelected.ItemsSource = null;
             lvRoomsSelected.ItemsSource = tempRoomList;
             lvAvailableRooms.ItemsSource = null;
             lvAvailableRooms.ItemsSource = availableRooms;
-        }
+        } //updates the listview
 
         private void checkInBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -122,16 +123,38 @@ namespace PRG2Assignment
             }
             if (check == true)
             {
-                Stay s = new Stay(DateTime.Parse(checkInDatePicker.Date.ToString()), DateTime.Parse(checkOutDatePicker.Date.ToString()));
-                Membership m = new Membership("Ordinary", 0);
-                Guest guest = new Guest(guestTxt.Text, passportTxt.Text, s, m, false);
-                guestList.Add(guest);
-                RefreshList();
+                Stay s = new Stay(DateTime.Parse(checkInDatePicker.Date.ToString()), DateTime.Parse(checkOutDatePicker.Date.ToString())); //get datestart and dateend
+                Membership m = new Membership("Ordinary", 0); 
+                Guest guest = new Guest(guestTxt.Text, passportTxt.Text, s, m, false); //create guest info 1:1
+                guestList.Add(guest); //add into guestList
+                RefreshList(); //reloads the listview for rooms
+                HotelRoom r = (HotelRoom)lvRoomsSelected.SelectedItem;
+                if (r.RoomType == "Standard")
+                {
+                    r.IsAvail = false;
+                    r.NoOfOccupants = Convert.ToInt32(noOfAdultTxt.Text) + Convert.ToInt32(noOfChildrentxt.Text);
+                    HotelRoom h = new StandardRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
+                    s.AddRoom(h);
+                    List<HotelRoom> roomList = s.RoomList;
+                    string guestStayDetails = "";
+                    foreach (HotelRoom room in roomList)
+                    {
+                        guestStayDetails += room.ToString() + guest.ToString();
+                    }
+                    roomsBookedTxt.Text = guestStayDetails;
+                }
+                else if (r.RoomType == "Deluxe")
+                {
+                    r.IsAvail = false;
+                    r.NoOfOccupants = Convert.ToInt32(noOfAdultTxt.Text) + Convert.ToInt32(noOfChildrentxt.Text);
+                    HotelRoom h = new StandardRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
+                    s.AddRoom(h);
+                }
                 // to be done: remove the selected room(s) from its available room list and 'give' it to the guest and display a check-in successful message [2.1.5]
             }
             else if (check == false)
             {
-                //put a message by welcoming the user back and 'give' the selected room(s) to this guest and display another message saying check-in is successful
+                //put a message by welcoming the user back and 'give' the selected room(s) to this guest and display another message saying check-in is successful [2.1.6]
             }
         }
 
