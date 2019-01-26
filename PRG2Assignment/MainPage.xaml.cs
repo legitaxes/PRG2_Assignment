@@ -167,15 +167,24 @@ namespace PRG2Assignment
                 statusUpdateText.Text = "Status update: Rooms" + " " + roomscheckedin +"checked in successfully.";
                 roomscheckedin = "";
             }
-            else if (check == false)
+            else if (check == false) //existing guest code goes here
             {
                 Stay s = new Stay(DateTime.Parse(checkInDatePicker.Date.ToString()), DateTime.Parse(checkOutDatePicker.Date.ToString())); //get datestart and dateend
                 foreach (Guest g in guestList)
                 {
-                    if (guestTxt.Text == g.Name)
+                    if(g.Name == guestTxt.Text)
                     {
-
+                        g.HotelStay = s; //puts the check-in date for the existing guest
                     }
+                }
+                for (var i = 0; i < tempRoomList.Count; i++)
+                {
+                    HotelRoom r = tempRoomList[i];
+                    r.IsAvail = false;
+                    r.NoOfOccupants = Convert.ToInt32(noOfAdultTxt.Text) + Convert.ToInt32(noOfChildrentxt.Text);
+                    HotelRoom h = new StandardRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
+                    s.AddRoom(h);
+                    List<HotelRoom> roomList = s.RoomList;
                 }
                 //put a message by welcoming the user back and 'give' the selected room(s) to this guest and display another message saying check-in is successful [2.1.6]
             }
@@ -245,6 +254,7 @@ namespace PRG2Assignment
 
         private void checkRoomsBtn_Click(object sender, RoutedEventArgs e)
         {
+            availableTxt.Text = "Available rooms:";
             RefreshList(); //loads available rooms into the availableroom listview [2.1.2]
         }
 
