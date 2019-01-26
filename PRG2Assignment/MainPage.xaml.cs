@@ -144,7 +144,8 @@ namespace PRG2Assignment
                     roomsBookedTxt.Text = guestStayDetails;
                     roomscheckedin += r.RoomNumber.ToString() + " ";
                 }
-
+                tempRoomList.Clear();
+                RefreshList();
                 //if (r.RoomType == "Standard")                                  
                 //{    
                 //}
