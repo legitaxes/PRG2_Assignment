@@ -126,26 +126,27 @@ namespace PRG2Assignment
                 Stay s = new Stay(DateTime.Parse(checkInDatePicker.Date.ToString()), DateTime.Parse(checkOutDatePicker.Date.ToString())); //get datestart and dateend
                 Membership m = new Membership("Ordinary", 0); 
                 Guest guest = new Guest(guestTxt.Text, passportTxt.Text, s, m, false); //create guest info 1:1
-                guestList.Add(guest); //add into guestList                                 
-                //foreach (ListViewItem item in lvRoomsSelected.Items)                                  
-                //{                                   
-                //    item.IsSelected = true;                                    
-                //}                                   
-                //if (r.RoomType == "Standard")                                  
-                //{                                   
-                //}
-                HotelRoom r = (HotelRoom)lvRoomsSelected.SelectedItem;
-                r.IsAvail = false;
-                r.NoOfOccupants = Convert.ToInt32(noOfAdultTxt.Text) + Convert.ToInt32(noOfChildrentxt.Text);
-                HotelRoom h = new StandardRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
-                s.AddRoom(h);
-                List<HotelRoom> roomList = s.RoomList;
-                string guestStayDetails = "";
-                foreach (HotelRoom room in roomList)
+                guestList.Add(guest); //add into guestList
+
+                for (var i = 0; i < tempRoomList.Count; i++)
                 {
-                    guestStayDetails += room.ToString() + guest.ToString();
+                    HotelRoom r = tempRoomList[i];
+                    r.IsAvail = false;
+                    r.NoOfOccupants = Convert.ToInt32(noOfAdultTxt.Text) + Convert.ToInt32(noOfChildrentxt.Text);
+                    HotelRoom h = new StandardRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
+                    s.AddRoom(h);
+                    List<HotelRoom> roomList = s.RoomList;
+                    string guestStayDetails = "";
+                    foreach (HotelRoom room in roomList)
+                    {
+                        guestStayDetails += room.ToString() + guest.ToString();
+                    }
+                    roomsBookedTxt.Text = guestStayDetails;
                 }
-                roomsBookedTxt.Text = guestStayDetails;
+
+
+                //if (r.RoomType == "Standard")                                  
+                //{    
                 //}
                 //else if (r.RoomType == "Deluxe")
                 //{
@@ -155,6 +156,7 @@ namespace PRG2Assignment
                 //s.AddRoom(h);
                 //}
                 // to be done: remove the selected room(s) from its available room list and 'give' it to the guest and display a check-in successful message [2.1.5]
+
             }
             else if (check == false)
             {
