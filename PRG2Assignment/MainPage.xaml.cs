@@ -104,7 +104,7 @@ namespace PRG2Assignment
                 {
                     availableRooms.Add(room);
                 }
-                else if (room.IsAvail == false) 
+                else if (room.IsAvail == false)
                 {
                     availableRooms.Remove(room);
                 }
@@ -131,7 +131,7 @@ namespace PRG2Assignment
             if (check == true)
             {
                 Stay s = new Stay(DateTime.Parse(checkInDatePicker.Date.ToString()), DateTime.Parse(checkOutDatePicker.Date.ToString())); //get datestart and dateend
-                Membership m = new Membership("Ordinary", 0); 
+                Membership m = new Membership("Ordinary", 0);
                 Guest guest = new Guest(guestTxt.Text, passportTxt.Text, s, m, false); //create guest info 1:1
                 guestList.Add(guest); //add into guestList
                 string roomscheckedin = "";
@@ -164,7 +164,7 @@ namespace PRG2Assignment
                 //s.AddRoom(h);
                 //}
                 // to be done: remove the selected room(s) from its available room list and 'give' it to the guest and display a check-in successful message [2.1.5]
-                statusUpdateText.Text = "Status update: Rooms" + " " + roomscheckedin +"checked in successfully.";
+                statusUpdateText.Text = "Status update: Rooms" + " " + roomscheckedin + "checked in successfully.";
                 roomscheckedin = "";
             }
             else if (check == false) //existing guest code goes here
@@ -172,7 +172,7 @@ namespace PRG2Assignment
                 Stay s = new Stay(DateTime.Parse(checkInDatePicker.Date.ToString()), DateTime.Parse(checkOutDatePicker.Date.ToString())); //get datestart and dateend
                 foreach (Guest g in guestList)
                 {
-                    if(g.Name == guestTxt.Text)
+                    if (g.Name == guestTxt.Text)
                     {
                         g.HotelStay = s; //puts the check-in date for the existing guest
                     }
@@ -270,37 +270,26 @@ namespace PRG2Assignment
                     {
                         availableTxt.Text = "Below are the rooms booked by the guest\n\n" + guest.Name + "'s Booked Room | Guest Number: " + guest.PPNumber;
                         lvAvailableRooms.ItemsSource = guest.HotelStay.RoomList;
-                        guestTxt.Text = "";
-                        passportTxt.Text = "";
                     }
 
                     if (guest.PPNumber == passportTxt.Text && guestTxt.Text == "")
                     {
                         availableTxt.Text = "Below are the rooms booked by the guest\n" + guest.Name + "'s Booked Room | Guest Number: " + guest.PPNumber;
                         lvAvailableRooms.ItemsSource = guest.HotelStay.RoomList;
-                        guestTxt.Text = "";
-                        passportTxt.Text = "";
                     }
 
                     if (guestTxt.Text != "" && passportTxt.Text != "")
                     {
-                        availableTxt.Text = "Please search by one method only";
-                        guestTxt.Text = "";
-                        passportTxt.Text = "";
+                        availableTxt.Text = "Please search by one method only.";
                     }
 
-                   if (availableTxt.Text == "Available rooms:")
+                    if ((availableTxt.Text == "Available rooms:") && (guestTxt.Text != "" || passportTxt.Text != ""))
                     {
-                        if ((guestTxt.Text != "" || passportTxt.Text != "") && availableTxt.Text == "Available rooms:")
-                        {
-
-                            availableTxt.Text = "No rooms under that name or passport number found";
-                            guestTxt.Text = "";
-                            passportTxt.Text = "";
-
-                        }
+                        availableTxt.Text = "No rooms under that name or passport number found.";
                     }
                 }
+                guestTxt.Text = "";
+                passportTxt.Text = "";
             }
         }
 
