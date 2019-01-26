@@ -127,7 +127,7 @@ namespace PRG2Assignment
                 Membership m = new Membership("Ordinary", 0); 
                 Guest guest = new Guest(guestTxt.Text, passportTxt.Text, s, m, false); //create guest info 1:1
                 guestList.Add(guest); //add into guestList
-
+                string roomscheckedin = "";
                 for (var i = 0; i < tempRoomList.Count; i++)
                 {
                     HotelRoom r = tempRoomList[i];
@@ -142,8 +142,8 @@ namespace PRG2Assignment
                         guestStayDetails += room.ToString() + guest.ToString();
                     }
                     roomsBookedTxt.Text = guestStayDetails;
+                    roomscheckedin += r.RoomNumber.ToString() + " ";
                 }
-
 
                 //if (r.RoomType == "Standard")                                  
                 //{    
@@ -156,7 +156,8 @@ namespace PRG2Assignment
                 //s.AddRoom(h);
                 //}
                 // to be done: remove the selected room(s) from its available room list and 'give' it to the guest and display a check-in successful message [2.1.5]
-
+                statusUpdateText.Text = "Status update: Rooms" + " " + roomscheckedin +"checked in successfully.";
+                roomscheckedin = "";
             }
             else if (check == false)
             {
