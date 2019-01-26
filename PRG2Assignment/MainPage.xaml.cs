@@ -128,28 +128,32 @@ namespace PRG2Assignment
                 Guest guest = new Guest(guestTxt.Text, passportTxt.Text, s, m, false); //create guest info 1:1
                 guestList.Add(guest); //add into guestList
                 RefreshList(); //reloads the listview for rooms
-                HotelRoom r = (HotelRoom)lvRoomsSelected.SelectedItem;
-                if (r.RoomType == "Standard")
+                //foreach (ListViewItem item in lvRoomsSelected.Items)
+                //{
+                //    item.IsSelected = true;
+                //}
+                HotelRoom r = (HotelRoom)lvRoomsSelected.SelectedItems; // <--- THIS DOES NOT WORK!!!!! IDK WHY
+                //if (r.RoomType == "Standard")
+                //{
+                r.IsAvail = false;
+                r.NoOfOccupants = Convert.ToInt32(noOfAdultTxt.Text) + Convert.ToInt32(noOfChildrentxt.Text);
+                HotelRoom h = new StandardRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
+                s.AddRoom(h);
+                List<HotelRoom> roomList = s.RoomList;
+                string guestStayDetails = "";
+                foreach (HotelRoom room in roomList)
                 {
-                    r.IsAvail = false;
-                    r.NoOfOccupants = Convert.ToInt32(noOfAdultTxt.Text) + Convert.ToInt32(noOfChildrentxt.Text);
-                    HotelRoom h = new StandardRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
-                    s.AddRoom(h);
-                    List<HotelRoom> roomList = s.RoomList;
-                    string guestStayDetails = "";
-                    foreach (HotelRoom room in roomList)
-                    {
-                        guestStayDetails += room.ToString() + guest.ToString();
-                    }
-                    roomsBookedTxt.Text = guestStayDetails;
+                    guestStayDetails += room.ToString() + guest.ToString();
                 }
-                else if (r.RoomType == "Deluxe")
-                {
-                    r.IsAvail = false;
-                    r.NoOfOccupants = Convert.ToInt32(noOfAdultTxt.Text) + Convert.ToInt32(noOfChildrentxt.Text);
-                    HotelRoom h = new StandardRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
-                    s.AddRoom(h);
-                }
+                roomsBookedTxt.Text = guestStayDetails;
+                //}
+                //else if (r.RoomType == "Deluxe")
+                //{
+                //r.IsAvail = false;
+                //r.NoOfOccupants = Convert.ToInt32(noOfAdultTxt.Text) + Convert.ToInt32(noOfChildrentxt.Text);
+                //HotelRoom h = new StandardRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
+                //s.AddRoom(h);
+                //}
                 // to be done: remove the selected room(s) from its available room list and 'give' it to the guest and display a check-in successful message [2.1.5]
             }
             else if (check == false)
