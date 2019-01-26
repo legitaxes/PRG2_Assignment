@@ -126,15 +126,15 @@ namespace PRG2Assignment
                 Stay s = new Stay(DateTime.Parse(checkInDatePicker.Date.ToString()), DateTime.Parse(checkOutDatePicker.Date.ToString())); //get datestart and dateend
                 Membership m = new Membership("Ordinary", 0); 
                 Guest guest = new Guest(guestTxt.Text, passportTxt.Text, s, m, false); //create guest info 1:1
-                guestList.Add(guest); //add into guestList
-                RefreshList(); //reloads the listview for rooms
-                //foreach (ListViewItem item in lvRoomsSelected.Items)
-                //{
-                //    item.IsSelected = true;
+                guestList.Add(guest); //add into guestList                                 
+                //foreach (ListViewItem item in lvRoomsSelected.Items)                                  
+                //{                                   
+                //    item.IsSelected = true;                                    
+                //}                                   
+                //if (r.RoomType == "Standard")                                  
+                //{                                   
                 //}
-                HotelRoom r = (HotelRoom)lvRoomsSelected.SelectedItems; // <--- THIS DOES NOT WORK!!!!! IDK WHY
-                //if (r.RoomType == "Standard")
-                //{
+                HotelRoom r = (HotelRoom)lvRoomsSelected.SelectedItem;
                 r.IsAvail = false;
                 r.NoOfOccupants = Convert.ToInt32(noOfAdultTxt.Text) + Convert.ToInt32(noOfChildrentxt.Text);
                 HotelRoom h = new StandardRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
