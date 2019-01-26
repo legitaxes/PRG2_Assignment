@@ -10,46 +10,38 @@
 
     <Grid RenderTransformOrigin="0.637,0.232">
         <TextBlock HorizontalAlignment="Left" Margin="36,37,0,0" TextWrapping="Wrap" Text="Name of Guest:" VerticalAlignment="Top" Width="138" Height="32"/>
-        <TextBox x:Name="guestTxt" HorizontalAlignment="Left" Margin="36,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="176" Height="50"/>
-        <TextBlock HorizontalAlignment="Left" Margin="222,37,0,0" TextWrapping="Wrap" Text="No. Of Adults:" VerticalAlignment="Top" Width="95" Height="32"/>
-        <TextBox x:Name="noOfAdultTxt" HorizontalAlignment="Left" Margin="235,67.908,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="2.021" Height="58" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-            <TextBox.RenderTransform>
-                <CompositeTransform ScaleX="-1" Rotation="180.171"/>
-            </TextBox.RenderTransform>
-        </TextBox>
+        <TextBox x:Name="guestTxt" HorizontalAlignment="Left" Margin="36,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="223" Height="50"/>
+        <TextBlock HorizontalAlignment="Left" Margin="294,37,0,0" TextWrapping="Wrap" Text="No. Of Adults:" VerticalAlignment="Top" Width="95" Height="32"/>
         <TextBlock HorizontalAlignment="Left" Margin="36,139,0,0" TextWrapping="Wrap" Text="Passport Number:" VerticalAlignment="Top" Width="138" Height="32"/>
-        <TextBox x:Name="passportTxt" HorizontalAlignment="Left" Margin="36,176,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="176" Height="50"/>
-        <TextBlock HorizontalAlignment="Left" Margin="222,139,0,0" TextWrapping="Wrap" Text="No. Of Children:" VerticalAlignment="Top" Width="122" Height="32"/>
-        <TextBox x:Name="noOfChildrentxt" HorizontalAlignment="Left" Margin="236,172.148,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="5.905" Height="58" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-            <TextBox.RenderTransform>
-                <CompositeTransform ScaleX="-1" Rotation="179.709"/>
-            </TextBox.RenderTransform>
-        </TextBox>
-        <Button x:Name="searchBtn" Content="Search" HorizontalAlignment="Left" Margin="36,239,0,0" VerticalAlignment="Top" Height="47" Width="83"/>
-        <Button x:Name="extendStayBtn" Content="Extend Stay" HorizontalAlignment="Left" Margin="129,239,0,0" VerticalAlignment="Top" Height="47" Width="108"/>
+        <TextBox x:Name="passportTxt" HorizontalAlignment="Left" Margin="36,176,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="223" Height="50"/>
+        <TextBlock HorizontalAlignment="Left" Margin="294,139,0,0" TextWrapping="Wrap" Text="No. Of Children:" VerticalAlignment="Top" Width="122" Height="32"/>
+        <Button x:Name="searchBtn" Content="Search" HorizontalAlignment="Left" Margin="36,242,0,0" VerticalAlignment="Top" Height="47" Width="100"/>
+        <Button x:Name="extendStayBtn" Content="Extend Stay" HorizontalAlignment="Left" Margin="159,242,0,0" VerticalAlignment="Top" Height="47" Width="100"/>
         <TextBlock x:Name="roomsBookedTxt" HorizontalAlignment="Left" Margin="36,294,0,0" TextWrapping="Wrap" Text="Available rooms:" VerticalAlignment="Top" Width="138" Height="32"/>
-        <ListView x:Name="lvAvailableRooms" HorizontalAlignment="Left" Height="297" Margin="36,325,0,0" VerticalAlignment="Top" Width="396"/>
-        <CheckBox x:Name="addBreakfastCheckBox" Content="Add Breakfast" HorizontalAlignment="Left" Margin="440,320,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="addBedCheckBox" Content="Add Bed" HorizontalAlignment="Left" Margin="440,414,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="addWifiCheckBox" Content="Add Wifi" HorizontalAlignment="Left" Margin="440,367,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="addRoomBtn" Content="Add Room" HorizontalAlignment="Left" Margin="441,463,0,0" VerticalAlignment="Top" Height="47" Width="116" Click="addRoomBtn_Click"/>
-        <Button x:Name="removeRoomBtn" Content="Remove Room" HorizontalAlignment="Left" Margin="441,529,0,0" VerticalAlignment="Top" Height="47" Width="116" Click="removeRoomBtn_Click"/>
-        <TextBlock Margin="343,37,793,0" Text="Hotel Guest Management System" VerticalAlignment="Top" Height="32" FontWeight="Bold" FontSize="20"/>
-        <TextBlock x:Name="statusUpdateText" HorizontalAlignment="Left" Margin="437,602,0,0" TextWrapping="Wrap" Text="Status Update: " VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="591,294,0,0" TextWrapping="Wrap" Text="Rooms Selected: " VerticalAlignment="Top" Width="138" Height="32"/>
-        <ListView x:Name="lvRoomsSelected" HorizontalAlignment="Left" Height="185" Margin="591,325,0,0" VerticalAlignment="Top" Width="862"/>
-        <Button x:Name="checkInBtn" Content="Check-In" HorizontalAlignment="Left" Margin="591,537,0,0" VerticalAlignment="Top" Width="264" Height="70" Click="checkInBtn_Click"/>
-        <TextBlock HorizontalAlignment="Left" Margin="471,108,0,0" TextWrapping="Wrap" Text="Check-In:" VerticalAlignment="Top" Width="95" Height="32"/>
-        <TextBlock HorizontalAlignment="Left" Margin="663,108,0,0" TextWrapping="Wrap" Text="Check Out:" VerticalAlignment="Top" Width="95" Height="32"/>
-        <CalendarDatePicker x:Name="checkInDatePicker" HorizontalAlignment="Left" Margin="471,155,0,0" VerticalAlignment="Top" Width="178"/>
-        <CalendarDatePicker x:Name="checkOutDatePicker" HorizontalAlignment="Left" Margin="663,153,0,0" VerticalAlignment="Top" Width="178"/>
-        <Button x:Name="checkRoomsBtn" Content="Check Rooms Available" HorizontalAlignment="Left" Margin="663,207,0,0" VerticalAlignment="Top" Height="52" Width="178" Click="checkRoomsBtn_Click"/>
-        <TextBlock x:Name="memberStatusText" HorizontalAlignment="Left" Margin="894,37,0,0" TextWrapping="Wrap" Text="Member Status:" VerticalAlignment="Top"/>
-        <TextBlock x:Name="pointsAvailableText" HorizontalAlignment="Left" Margin="894,64,0,0" TextWrapping="Wrap" Text="Points Available:" VerticalAlignment="Top"/>
-        <Button x:Name="redeemPointsBtn" Content="Redeem Points" HorizontalAlignment="Left" Margin="992,202,0,0" VerticalAlignment="Top" Height="57" Width="124"/>
-        <TextBox x:Name="pointsTxt" HorizontalAlignment="Left" Margin="894,202,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="93" Height="57"/>
-        <TextBlock x:Name="invoiceText" HorizontalAlignment="Left" Margin="894,278,0,0" TextWrapping="Wrap" Text="Invoice: " VerticalAlignment="Top" Width="138" Height="32"/>
-        <Button x:Name="checkOutBtn" Content="Check-Out" HorizontalAlignment="Left" Margin="894,537,0,0" VerticalAlignment="Top" Width="222" Height="70"/>
+        <ListView x:Name="lvAvailableRooms" HorizontalAlignment="Left" Height="297" Margin="36,325,0,0" VerticalAlignment="Top" Width="497"/>
+        <CheckBox x:Name="addBreakfastCheckBox" Content="Add Breakfast" HorizontalAlignment="Left" Margin="541,283,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="addBedCheckBox" Content="Add Bed" HorizontalAlignment="Left" Margin="541,377,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="addWifiCheckBox" Content="Add Wifi" HorizontalAlignment="Left" Margin="541,330,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="addRoomBtn" Content="Add Room" HorizontalAlignment="Left" Margin="542,426,0,0" VerticalAlignment="Top" Height="47" Width="116" Click="addRoomBtn_Click"/>
+        <Button x:Name="removeRoomBtn" Content="Remove Room" HorizontalAlignment="Left" Margin="542,492,0,0" VerticalAlignment="Top" Height="47" Width="116" Click="removeRoomBtn_Click"/>
+        <TextBlock Margin="570,32,566,0" Text="Hotel Guest Management System" VerticalAlignment="Top" Height="32" FontWeight="Bold" FontSize="20"/>
+        <TextBlock x:Name="statusUpdateText" HorizontalAlignment="Left" Margin="538,565,0,0" TextWrapping="Wrap" Text="Status Update: " VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="736,284,0,0" TextWrapping="Wrap" Text="Rooms Selected: " VerticalAlignment="Top" Width="109" Height="32"/>
+        <ListView x:Name="lvRoomsSelected" HorizontalAlignment="Left" Height="185" Margin="736,315,0,0" VerticalAlignment="Top" Width="680"/>
+        <Button x:Name="checkInBtn" Content="Check-In" HorizontalAlignment="Left" Margin="736,581,0,0" VerticalAlignment="Top" Width="209" Height="70" Click="checkInBtn_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="564,94,0,0" TextWrapping="Wrap" Text="Check-In:" VerticalAlignment="Top" Width="95" Height="32"/>
+        <TextBlock HorizontalAlignment="Left" Margin="756,94,0,0" TextWrapping="Wrap" Text="Check Out:" VerticalAlignment="Top" Width="95" Height="32"/>
+        <CalendarDatePicker x:Name="checkInDatePicker" HorizontalAlignment="Left" Margin="564,141,0,0" VerticalAlignment="Top" Width="178"/>
+        <CalendarDatePicker x:Name="checkOutDatePicker" HorizontalAlignment="Left" Margin="756,139,0,0" VerticalAlignment="Top" Width="178"/>
+        <Button x:Name="checkRoomsBtn" Content="Check Rooms Available" HorizontalAlignment="Left" Margin="756,195,0,0" VerticalAlignment="Top" Height="50" Width="178" Click="checkRoomsBtn_Click"/>
+        <TextBlock x:Name="memberStatusText" HorizontalAlignment="Left" Margin="1154,67,0,0" TextWrapping="Wrap" Text="Member Status:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="pointsAvailableText" HorizontalAlignment="Left" Margin="1154,94,0,0" TextWrapping="Wrap" Text="Points Available:" VerticalAlignment="Top"/>
+        <Button x:Name="redeemPointsBtn" Content="Redeem Points" HorizontalAlignment="Left" Margin="1292,195,0,0" VerticalAlignment="Top" Height="50" Width="124"/>
+        <TextBox x:Name="pointsTxt" HorizontalAlignment="Left" Margin="1154,195,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="93" Height="50"/>
+        <TextBlock x:Name="invoiceText" HorizontalAlignment="Left" Margin="1307,278,0,0" TextWrapping="Wrap" Text="Invoice: " VerticalAlignment="Top" Width="109" Height="32"/>
+        <Button x:Name="checkOutBtn" Content="Check-Out" HorizontalAlignment="Left" Margin="1207,581,0,0" VerticalAlignment="Top" Width="209" Height="70"/>
+        <TextBox x:Name="noOfAdultTxt" HorizontalAlignment="Left" Margin="294,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="28" Height="50"/>
+        <TextBox x:Name="noOfChildrentxt" HorizontalAlignment="Left" Margin="294,176,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="28" Height="50"/>
 
     </Grid>
 </Page>
