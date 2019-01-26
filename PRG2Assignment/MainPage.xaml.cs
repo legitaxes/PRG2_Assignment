@@ -260,19 +260,45 @@ namespace PRG2Assignment
 
         private void SearchBtn_Click(object sender, RoutedEventArgs e)
         {
+            availableTxt.Text = "Available rooms:";
+            lvAvailableRooms.ItemsSource = null;
             if (guestTxt.Text != "" || guestTxt.Text != " ")
             {
                 foreach (Guest guest in guestList)
                 {
-                    if (guest.Name == guestTxt.Text)
+                    if (guest.Name == guestTxt.Text && passportTxt.Text == "")
                     {
-                        availableTxt.Text = "Below are the Rooms Booked by the guest\n\n" + guest.Name + "'s Booked Room | Guest Number: " + guest.PPNumber;
+                        availableTxt.Text = "Below are the rooms booked by the guest\n\n" + guest.Name + "'s Booked Room | Guest Number: " + guest.PPNumber;
                         lvAvailableRooms.ItemsSource = guest.HotelStay.RoomList;
+                        guestTxt.Text = "";
+                        passportTxt.Text = "";
                     }
-                    else if (guest.PPNumber == passportTxt.Text)
+
+                    if (guest.PPNumber == passportTxt.Text && guestTxt.Text == "")
                     {
-                        availableTxt.Text = "Below are the Rooms Booked by the guest\n" + guest.Name + "'s Booked Room | Guest Number: " + guest.PPNumber;
+                        availableTxt.Text = "Below are the rooms booked by the guest\n" + guest.Name + "'s Booked Room | Guest Number: " + guest.PPNumber;
                         lvAvailableRooms.ItemsSource = guest.HotelStay.RoomList;
+                        guestTxt.Text = "";
+                        passportTxt.Text = "";
+                    }
+
+                    if (guestTxt.Text != "" && passportTxt.Text != "")
+                    {
+                        availableTxt.Text = "Please search by one method only";
+                        guestTxt.Text = "";
+                        passportTxt.Text = "";
+                    }
+
+                   if (availableTxt.Text == "Available rooms:")
+                    {
+                        if ((guestTxt.Text != "" || passportTxt.Text != "") && availableTxt.Text == "Available rooms:")
+                        {
+
+                            availableTxt.Text = "No rooms under that name or passport number found";
+                            guestTxt.Text = "";
+                            passportTxt.Text = "";
+
+                        }
                     }
                 }
             }
