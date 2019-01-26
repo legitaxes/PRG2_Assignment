@@ -31,37 +31,12 @@ namespace PRG2Assignment
         public MainPage()
         {
             this.InitializeComponent();
-            InitHotelRooms(); //create room objects and stores into hotelList 
-            InitGuests(); //create guest objects and stores into guestList
+            InitData(); //create room objects and stores into hotelList 
             CheckAvailability(); //checks for room that is available and put it into a list
         }
 
-        public void InitGuests() {
-            //first guest information
-            Stay s1 = new Stay(Convert.ToDateTime("26-Jan-2019"), Convert.ToDateTime("02-Feb-2019"));
-            Membership m1 = new Membership("Gold", 280);
-            Guest g1 = new Guest("Amelia", "S1234567A", s1, m1, false);
-            //second guest information
-            Stay s2 = new Stay(Convert.ToDateTime("25-Jan-2019"), Convert.ToDateTime("31-Jan-2019"));
-            Membership m2 = new Membership("Ordinary", 0);
-            Guest g2 = new Guest("Bob", "G1234567A", s2, m2, false);
-            //third guest information
-            Stay s3 = new Stay(Convert.ToDateTime("01-Feb-2019"), Convert.ToDateTime("06-Feb-2019"));
-            Membership m3 = new Membership("Silver", 190);
-            Guest g3 = new Guest("Cody", "G234567A", s3, m3, false);
-            //fourth guest information
-            Stay s4 = new Stay(Convert.ToDateTime("28-Jan-2019"), Convert.ToDateTime("10-Feb-2019"));
-            Membership m4 = new Membership("Gold", 10);
-            Guest g4 = new Guest("Edda", "S3456789A", s4, m4, false);
 
-            //adding guest objects into guestList
-            guestList.Add(g1);
-            guestList.Add(g2);
-            guestList.Add(g3);
-            guestList.Add(g4);
-        } //create guest objects
-
-        public void InitHotelRooms() //create room objects
+        public void InitData() //create room objects
         {
             //standard room objects
             HotelRoom room1 = new StandardRoom("Standard", "101", "Single", 90, false, 0);
@@ -88,7 +63,39 @@ namespace PRG2Assignment
             hotelList.Add(room9);
             hotelList.Add(room10);
             hotelList.Add(room11);
-        } 
+
+            //first guest information
+            Stay s1 = new Stay(Convert.ToDateTime("26-Jan-2019"), Convert.ToDateTime("02-Feb-2019"));
+            List<HotelRoom> roomList1 = s1.RoomList;
+            s1.AddRoom(room1);
+            Membership m1 = new Membership("Gold", 280);
+            Guest g1 = new Guest("Amelia", "S1234567A", s1, m1, false);
+            //second guest information
+            Stay s2 = new Stay(Convert.ToDateTime("25-Jan-2019"), Convert.ToDateTime("31-Jan-2019"));
+            List<HotelRoom> roomList2 = s2.RoomList;
+            s2.AddRoom(room7);
+            Membership m2 = new Membership("Ordinary", 0);
+            Guest g2 = new Guest("Bob", "G1234567A", s2, m2, false);
+            //third guest information
+            Stay s3 = new Stay(Convert.ToDateTime("01-Feb-2019"), Convert.ToDateTime("06-Feb-2019"));
+            List<HotelRoom> roomList3 = s3.RoomList;
+            s3.AddRoom(room4);
+            Membership m3 = new Membership("Silver", 190);
+            Guest g3 = new Guest("Cody", "G234567A", s3, m3, false);
+            //fourth guest information
+            Stay s4 = new Stay(Convert.ToDateTime("28-Jan-2019"), Convert.ToDateTime("10-Feb-2019"));
+            List<HotelRoom> roomList4 = s4.RoomList;
+            s4.AddRoom(room10);
+            Membership m4 = new Membership("Gold", 10);
+            Guest g4 = new Guest("Edda", "S3456789A", s4, m4, false);
+
+            //adding guest objects into guestList
+            guestList.Add(g1);
+            guestList.Add(g2);
+            guestList.Add(g3);
+            guestList.Add(g4);
+
+        }
 
         public void CheckAvailability() {
             foreach (HotelRoom room in hotelList)
@@ -162,6 +169,14 @@ namespace PRG2Assignment
             }
             else if (check == false)
             {
+                Stay s = new Stay(DateTime.Parse(checkInDatePicker.Date.ToString()), DateTime.Parse(checkOutDatePicker.Date.ToString())); //get datestart and dateend
+                foreach (Guest g in guestList)
+                {
+                    if (guestTxt.Text == g.Name)
+                    {
+
+                    }
+                }
                 //put a message by welcoming the user back and 'give' the selected room(s) to this guest and display another message saying check-in is successful [2.1.6]
             }
         }
@@ -237,47 +252,17 @@ namespace PRG2Assignment
         {
             if (guestTxt.Text != "" || guestTxt.Text != " ")
             {
-                if (passportTxt.Text == "")
-                { 
-                    foreach(Guest guest in guestList)
+                foreach (Guest guest in guestList)
+                {
+                    if (guest.Name == guestTxt.Text)
                     {
-                        if (guest.Name == guestTxt.Text)
-                        {
-                            passportTxt.Text = roomList[0].ToString(); ;
-                        }
+                        lvAvailableRooms.ItemsSource = guest.HotelStay.RoomList;
+                    }
+                    else if (guest.PPNumber == passportTxt.Text)
+                    {
+                        lvAvailableRooms.ItemsSource = guest.HotelStay.RoomList;
                     }
                 }
-                
-                else
-                {
-                    guestTxt.Text = "n";
-                    passportTxt.Text = "n";
-                }
-            }
-
-            else if (passportTxt.Text != "" || passportTxt.Text != " ")
-            {
-                if (guestTxt.Text == "")
-                {
-                    foreach(Guest guest in guestList)
-                    {
-                        if (guest.PPNumber == passportTxt.Text)
-                        {
-
-                        }
-                    }
-                }
-
-                else
-                {
-                    guestTxt.Text = "n";
-                    passportTxt.Text = "n";
-                }
-            }
-
-            else
-            {
-
             }
         }
 
