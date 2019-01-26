@@ -27,6 +27,7 @@ namespace PRG2Assignment
         List<Guest> guestList = new List<Guest>(); //stores all the guests objects
         List<HotelRoom> availableRooms = new List<HotelRoom>(); //stores all the available room objects
         List<HotelRoom> tempRoomList = new List<HotelRoom>(); //stores selected room objects
+        List<Stay> roomList = new List<Stay>(); //stores all stay information
 
         public MainPage()
         {
@@ -59,6 +60,10 @@ namespace PRG2Assignment
             guestList.Add(g2);
             guestList.Add(g3);
             guestList.Add(g4);
+            roomList.Add(s1);
+            roomList.Add(s2);
+            roomList.Add(s3);
+            roomList.Add(s4);
         } //create guest objects
 
         public void InitHotelRooms() //create room objects
@@ -231,5 +236,60 @@ namespace PRG2Assignment
         {
             RefreshList(); //loads available rooms into the availableroom listview [2.1.2]
         }
+
+        private void SearchBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (guestTxt.Text != "" || guestTxt.Text != " ")
+            {
+                if (passportTxt.Text == "")
+                { 
+                    foreach(Guest guest in guestList)
+                    {
+                        if (guest.Name == guestTxt.Text)
+                        {
+                            passportTxt.Text = roomList[0].ToString(); ;
+                        }
+                    }
+                }
+                
+                else
+                {
+                    guestTxt.Text = "n";
+                    passportTxt.Text = "n";
+                }
+            }
+
+            else if (passportTxt.Text != "" || passportTxt.Text != " ")
+            {
+                if (guestTxt.Text == "")
+                {
+                    foreach(Guest guest in guestList)
+                    {
+                        if (guest.PPNumber == passportTxt.Text)
+                        {
+
+                        }
+                    }
+                }
+
+                else
+                {
+                    guestTxt.Text = "n";
+                    passportTxt.Text = "n";
+                }
+            }
+
+            else
+            {
+
+            }
+        }
+
+        private void CheckOutBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
     }
 }
