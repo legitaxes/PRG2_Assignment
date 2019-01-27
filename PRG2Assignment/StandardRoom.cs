@@ -27,7 +27,7 @@ namespace PRG2Assignment
 
         public StandardRoom(string rt, string rn, string bc, double dr, bool ia, int no) : base(rt, rn, bc, dr, ia, no){}
 
-        public override double CalculateCharges() //temporary return value until we actually do the method
+        public override double CalculateCharges() 
         {
             double total = DailyRate;
 
@@ -40,7 +40,7 @@ namespace PRG2Assignment
             {
                 total += 20;
             }
-            return total; //temporary return value until we actually do the method
+            return total;
         }
 
         public override string ToString()
