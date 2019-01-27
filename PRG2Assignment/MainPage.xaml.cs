@@ -215,7 +215,15 @@ namespace PRG2Assignment
                             {
                                 if (g.Name == guestTxt.Text)
                                 {
-                                    g.HotelStay.AddRoom(h); //add it into the guest.RoomList
+                                    int noOfGuest = (Convert.ToInt32(noOfAdultTxt.Text) / 2) + (Convert.ToInt32(noOfChildrentxt.Text));
+                                    if (noOfGuest <= r.NoOfOccupants)
+                                    {
+                                        g.HotelStay.AddRoom(h); //add it into the guest.RoomList
+                                    }
+                                    else
+                                    {
+                                        statusUpdateText.Text = "Add an Additional Bed\nOr Change Your Selected Choice";
+                                    }
                                 }
                             }
                         }
@@ -226,7 +234,15 @@ namespace PRG2Assignment
                             {
                                 if (g.Name == guestTxt.Text)
                                 {
-                                    g.HotelStay.AddRoom(h);  //add it into the guest.RoomList
+                                    int noOfGuest = (Convert.ToInt32(noOfAdultTxt.Text) / 2) + (Convert.ToInt32(noOfChildrentxt.Text));
+                                    if (noOfGuest < r.NoOfOccupants)
+                                    {
+                                        g.HotelStay.AddRoom(h);  //add it into the guest.RoomList
+                                    }
+                                    else
+                                    {
+                                        statusUpdateText.Text = "Add an Additional Bed\nOr Change Your Selected Choice";
+                                    }
                                 }
                             }
                         }
