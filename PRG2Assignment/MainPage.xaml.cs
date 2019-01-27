@@ -502,6 +502,10 @@ namespace PRG2Assignment
                 {
                     guest.HotelStay.CheckOutDate = guest.HotelStay.CheckOutDate.AddDays(1); //add one day to the checkoutDate [3.3]
                     availableTxt.Text = "Rooms Booked by: " + guest.Name + " (" + guest.PPNumber + ")\n" + "Check In: " + guest.HotelStay.CheckInDate + " Check Out: " + guest.HotelStay.CheckOutDate;
+                    foreach(HotelRoom room in (List<HotelRoom>)lvAvailableRooms.ItemsSource)
+                    {
+                        room.
+                    }
                 }
             }
         }
