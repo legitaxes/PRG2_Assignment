@@ -405,6 +405,7 @@ namespace PRG2Assignment
                             sr.RequireWifi = false;
                             sr.RequireBreakfast = false;
                             sr.IsAvail = true;
+                            availableRooms.Add(sr);
                             double totalamount = g.HotelStay.CalculateTotal();
                             double points = totalamount / 10;
                             invoiceText.Text = "Thank you for staying with us!\n You have earned " + Math.Round(points,1) + " points\nIt will be credited to your account.";
@@ -442,6 +443,7 @@ namespace PRG2Assignment
                             DeluxeRoom dr = (DeluxeRoom)g.HotelStay.RoomList[i];
                             dr.AdditionalBed = false;
                             dr.IsAvail = true;
+                            availableRooms.Add(dr);
                             double totalamount = g.HotelStay.CalculateTotal();
                             double points = totalamount / 10;
                             invoiceText.Text = "Thank you for staying with us!\n You have earned " + Math.Round(points, 1) + " points\nIt will be credited to your account.";
@@ -474,7 +476,8 @@ namespace PRG2Assignment
                             g.HotelStay.RoomList.Remove(dr);
                         }
                     }
-                    lvAvailableRooms.ItemsSource = null;
+                    availableTxt.Text = "Available rooms:";
+                    RefreshList();
                 }
             }
         }
