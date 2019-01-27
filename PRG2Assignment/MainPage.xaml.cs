@@ -291,7 +291,9 @@ namespace PRG2Assignment
                 {
                     if (guest.Name == guestTxt.Text && passportTxt.Text == "")
                     {
-                        availableTxt.Text = "Rooms Booked by: " + guest.Name + " (" + guest.PPNumber + ")\nMembership: " + guest.Membership.Status + "\n" + "Check In: " + guest.HotelStay.CheckInDate + " Check Out: " + guest.HotelStay.CheckOutDate;
+                        availableTxt.Text = "Rooms Booked by: " + guest.Name + " (" + guest.PPNumber + ")\n" + "Check In: " + guest.HotelStay.CheckInDate + " Check Out: " + guest.HotelStay.CheckOutDate;
+                        memberStatusText.Text = "Member Status: " + guest.Membership.Status;
+                        pointsAvailableText.Text = "Points Available: " + guest.Membership.Points;
                         lvAvailableRooms.ItemsSource = guest.HotelStay.RoomList;
                         //double test = guest.HotelStay.RoomList[0].
                         double totalrate = guest.HotelStay.RoomList[0].CalculateCharges();
@@ -304,6 +306,8 @@ namespace PRG2Assignment
                     if (guest.PPNumber == passportTxt.Text && guestTxt.Text == "")
                     {
                         availableTxt.Text = "Rooms Booked by: " + guest.Name + " (" + guest.PPNumber + ")\n" + "Check In: " + guest.HotelStay.CheckInDate + " Check Out: " + guest.HotelStay.CheckOutDate;
+                        memberStatusText.Text = "Member Status: " + guest.Membership.Status;
+                        pointsAvailableText.Text = "Points Available: " + guest.Membership.Points;
                         lvAvailableRooms.ItemsSource = guest.HotelStay.RoomList;
                         double totalrate = guest.HotelStay.RoomList[0].CalculateCharges();
                         double totalamount = guest.HotelStay.CalculateTotal(totalrate);
@@ -326,7 +330,12 @@ namespace PRG2Assignment
 
         private void CheckOutBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            foreach (Guest guest in guestList)
+            {
+                double totalrate = guest.HotelStay.RoomList[0].CalculateCharges();
+                double totalamount = guest.HotelStay.CalculateTotal(totalrate);
+                guest.Membership.EarnPoints(totalamount); //add points to the member
+            }
         }
 
         private void extendStayBtn_Click(object sender, RoutedEventArgs e)
