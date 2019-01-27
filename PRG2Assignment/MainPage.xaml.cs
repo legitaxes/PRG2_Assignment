@@ -100,7 +100,7 @@ namespace PRG2Assignment
 
         public void CheckAvailability() {
             foreach (HotelRoom room in hotelList)
-            {
+            {             
                 if (room.IsAvail == true) //checks whether the room is available if it is, add it into available list which is use to be displayed on the listview
                 {
                     availableRooms.Add(room);
@@ -207,7 +207,10 @@ namespace PRG2Assignment
 
         private void addRoomBtn_Click(object sender, RoutedEventArgs e)
         {
+            int totaloccupants = Convert.ToInt32(noOfAdultTxt.Text) + Convert.ToInt32(noOfAdultTxt.Text);
+            int capacitycount = 0;
             int p = 0;
+
             HotelRoom r = (HotelRoom)lvAvailableRooms.SelectedItem;
             if (r.RoomType == "Standard") //check for standard or deluxe and allow which checkbox to be checked [2.1.3]
             {
@@ -222,6 +225,32 @@ namespace PRG2Assignment
                     sr.RequireBreakfast = true;
                     p += 20;
                 }
+
+                sr.DailyRate += p;
+                sr.IsAvail = false;
+
+                if (sr.IsAvail == false)
+                {
+                    availableRooms.Remove(sr);
+                }
+
+                if (sr.BedConfiguration == "Single" )
+                {
+                    capacitycount += 1;
+                }
+
+                if (sr.BedConfiguration == "Twin")
+                {
+                    capacitycount += 2;
+                }
+
+                if (sr.BedConfiguration == "Triple")
+                {
+                    capacitycount += 3;
+                }
+
+                tempRoomList.Add(sr);
+                RefreshList();
             }
 
             else if (r.RoomType == "Deluxe")
@@ -232,16 +261,32 @@ namespace PRG2Assignment
                     dr.AdditionalBed = true;
                     p = 25;
                 }
-            }
 
-            r.DailyRate += p;
-            r.IsAvail = false;
-            if (r.IsAvail == false)
-            {
-                availableRooms.Remove(r);
+                dr.DailyRate += p;
+                dr.IsAvail = false;
+
+                if (dr.IsAvail == false)
+                {
+                    availableRooms.Remove(dr);
+                }
+                tempRoomList.Add(dr);
+                RefreshList();
+
+                if (dr.BedConfiguration == "Twin")
+                {
+                    capacitycount += 2;           
+                }
+
+                if (dr.BedConfiguration == "Triple")
+                {
+                    capacitycount += 3;
+                }
             }
-            tempRoomList.Add(r);
-            RefreshList();
+            
+            if (totaloccupants > capacitycount)
+            {
+
+            }
         }
 
         private void removeRoomBtn_Click(object sender, RoutedEventArgs e) //removes the selected room from the selected listview [2.1.4]
