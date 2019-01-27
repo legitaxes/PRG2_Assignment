@@ -260,22 +260,34 @@ namespace PRG2Assignment
 
         private void SearchBtn_Click(object sender, RoutedEventArgs e)
         {
+            string a = "";
             availableTxt.Text = "Available rooms:";
             lvAvailableRooms.ItemsSource = null;
-            if (guestTxt.Text != "" || guestTxt.Text != " ")
+            invoiceText.Text = "";
+            if (guestTxt.Text != "" || guestTxt.Text != " " || passportTxt.Text != "" || passportTxt.Text != " ")
             {
+                string result = "";
                 foreach (Guest guest in guestList)
                 {
                     if (guest.Name == guestTxt.Text && passportTxt.Text == "")
                     {
-                        availableTxt.Text = "Room(s) Booked by " + guest.Name + " (" + guest.PPNumber + ")\nCheckIn:" + guest.HotelStay.CheckInDate + "\tCheckOut:" + guest.HotelStay.CheckOutDate;
-                        lvAvailableRooms.ItemsSource = guest.HotelStay.RoomList;
+                        availableTxt.Text = "Below are the rooms booked by the guest\n\n" + guest.Name + "'s Booked Room | Guest Number: " + guest.PPNumber;
+                        lvAvailableRooms.ItemsSource = guest.HotelStay.RoomList;       
+                        double test = guest.HotelStay.RoomList[0].
+                        double totalrate = guest.HotelStay.RoomList[0].CalculateCharges();
+                        double totalamount = guest.HotelStay.CalculateTotal(totalrate);
+                        double totaldays = totalamount / totalrate;
+                        result += "You are staying for " + totaldays + " nights and the total amount is " + totalamount ;
+                        //The breakdown for the number of nights, additional requests, and total amount should be displayed.
                     }
 
                     if (guest.PPNumber == passportTxt.Text && guestTxt.Text == "")
                     {
-                        availableTxt.Text = "Room(s) Booked by " + guest.Name + " (" + guest.PPNumber + ")\nCheckIn:" + guest.HotelStay.CheckInDate + "\tCheckOut:" + guest.HotelStay.CheckOutDate;
+                        availableTxt.Text = "Below are the rooms booked by the guest\n" + guest.Name + "'s Booked Room | Guest Number: " + guest.PPNumber;
                         lvAvailableRooms.ItemsSource = guest.HotelStay.RoomList;
+                        double totalrate = guest.HotelStay.RoomList[0].CalculateCharges();
+                        double totalamount = guest.HotelStay.CalculateTotal(totalrate);
+                        result += totalamount + " ";
                     }
 
                     if (guestTxt.Text != "" && passportTxt.Text != "")
@@ -288,7 +300,8 @@ namespace PRG2Assignment
                         availableTxt.Text = "No rooms under that name or passport number found.";
                     }
                 }
-            }
+                invoiceText.Text += result;
+            }        
         }
 
         private void CheckOutBtn_Click(object sender, RoutedEventArgs e)
@@ -296,23 +309,6 @@ namespace PRG2Assignment
 
         }
 
-        private void extendStayBtn_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (Guest guest in guestList)
-            {
-                if (guest.Name == guestTxt.Text)
-                {
-                    guest.HotelStay.CheckInDate = guest.HotelStay.CheckInDate.Date.AddDays(1);
-                    guest.HotelStay.CheckOutDate = guest.HotelStay.CheckOutDate.Date.AddDays(1);
-                    availableTxt.Text = "Room(s) Booked by " + guest.Name + " (" + guest.PPNumber + ")\nCheckIn:" + guest.HotelStay.CheckInDate + "\tCheckOut:" + guest.HotelStay.CheckOutDate;
-                }
-                else if (guest.PPNumber == passportTxt.Text)
-                {
-                    guest.HotelStay.CheckInDate = guest.HotelStay.CheckInDate.Date.AddDays(1);
-                    guest.HotelStay.CheckOutDate = guest.HotelStay.CheckOutDate.Date.AddDays(1);
-                    availableTxt.Text = "Room(s) Booked by " + guest.Name + " (" + guest.PPNumber + ")\nCheckIn:" + guest.HotelStay.CheckInDate + "\tCheckOut:" + guest.HotelStay.CheckOutDate;
-                }
-            }
-        }
+
     }
 }
