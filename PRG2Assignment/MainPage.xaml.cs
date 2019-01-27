@@ -169,14 +169,6 @@ namespace PRG2Assignment
             }
             else if (check == false) //existing guest code goes here
             {
-                //Stay s = new Stay(DateTime.Parse(checkInDatePicker.Date.ToString()), DateTime.Parse(checkOutDatePicker.Date.ToString())); //get datestart and dateend
-                //foreach (Guest g in guestList)
-                //{
-                //    if (g.Name == guestTxt.Text)
-                //    {
-                //        g.HotelStay = s; //puts the check-in date for the existing guest
-                //    }
-                //}
                 for (var i = 0; i < tempRoomList.Count; i++)
                 {
                     HotelRoom r = tempRoomList[i];
@@ -208,8 +200,9 @@ namespace PRG2Assignment
                     }
                     //List<HotelRoom> roomList = g.HotelStay.RoomList;
                 }
-                //put a message by welcoming the user back and 'give' the selected room(s) to this guest and display another message saying check-in is successful [2.1.6]
+                //put a message by welcoming the user back and 'give' the selected room(s) to this guest and display another message saying check -in is successful[2.1.6]
             }
+           
         }
 
         private void addRoomBtn_Click(object sender, RoutedEventArgs e)
@@ -283,8 +276,14 @@ namespace PRG2Assignment
 
         private void checkRoomsBtn_Click(object sender, RoutedEventArgs e)
         {
-            availableTxt.Text = "Available rooms:";
-            RefreshList(); //loads available rooms into the availableroom listview [2.1.2]
+            if (noOfAdultTxt.Text != "" || noOfChildrentxt.Text != "")
+            {
+                availableTxt.Text = "Available rooms:";
+                RefreshList(); //loads available rooms into the availableroom listview [2.1.2]
+            }
+            else
+            {
+            }
         }
 
         private void SearchBtn_Click(object sender, RoutedEventArgs e)
@@ -322,7 +321,7 @@ namespace PRG2Assignment
                                     DeluxeRoom dr = (DeluxeRoom)guest.HotelStay.RoomList[i];
                                     bool checkbed = dr.AdditionalBed;
 
-                                    double totalrate = guest.HotelStay.RoomList[count].CalculateCharges();
+                                    double totalrate = guest.HotelStay.RoomList[i].CalculateCharges();
                                     double totalamount = guest.HotelStay.CalculateTotal(totalrate);
                                     double totaldays = totalamount / totalrate;
                                     double roomNumber = Convert.ToDouble(guest.HotelStay.RoomList[i].RoomNumber);
@@ -375,6 +374,7 @@ namespace PRG2Assignment
                             sr.RequireWifi = false;
                             sr.RequireBreakfast = false;
                             sr.IsAvail = true;
+                            RefreshList();
                         }
 
                         if (g.HotelStay.RoomList[i].RoomType == "Deluxe")
@@ -382,6 +382,7 @@ namespace PRG2Assignment
                             DeluxeRoom dr = (DeluxeRoom)g.HotelStay.RoomList[i];
                             dr.AdditionalBed = false;
                             dr.IsAvail = true;
+                            RefreshList();
                         }
                     }
                 }
