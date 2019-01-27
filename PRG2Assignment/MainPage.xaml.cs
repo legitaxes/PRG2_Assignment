@@ -141,32 +141,27 @@ namespace PRG2Assignment
                     HotelRoom r = tempRoomList[i];
                     r.IsAvail = false;
                     r.NoOfOccupants = Convert.ToInt32(noOfAdultTxt.Text) + Convert.ToInt32(noOfChildrentxt.Text);
-                    HotelRoom h = new StandardRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
+                    if (r.RoomType == "Standard")
+                    {
+                        HotelRoom h = new StandardRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
+                    }
+                    else if (r.RoomType == "Deluxe")
+                    {
+                        HotelRoom h = new DeluxeRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
+                    }
                     s.AddRoom(h);
-                    //List<HotelRoom> roomList = s.RoomList;
-                    //Debug.WriteLine(roomList[0]);
-                    //Debug.WriteLine(roomList[1]);
-                    //string guestStayDetails = "";
-                    //foreach (HotelRoom room in roomList)
-                    //{
-                    //    guestStayDetails += room.ToString() + guest.ToString();
-                    //}
-                    //roomsBookedTxt.Text = guestStayDetails;
-                    //roomscheckedin += r.RoomNumber.ToString() + " ";
+                    List<HotelRoom> roomList = s.RoomList;
+                    Debug.WriteLine(roomList[0]);
+                    string guestStayDetails = "";
+                    foreach (HotelRoom room in roomList)
+                    {
+                        guestStayDetails += room.ToString() + guest.ToString();
+                    }
+                    roomsBookedTxt.Text = guestStayDetails;
+                    roomscheckedin += r.RoomNumber.ToString() + " ";
                 }
                 tempRoomList.Clear(); //clears the selected room list
                 RefreshList(); //refreshes room list
-
-                //if (r.RoomType == "Standard")                                  
-                //{    
-                //}
-                //else if (r.RoomType == "Deluxe")
-                //{
-                //r.IsAvail = false;
-                //r.NoOfOccupants = Convert.ToInt32(noOfAdultTxt.Text) + Convert.ToInt32(noOfChildrentxt.Text);
-                //HotelRoom h = new StandardRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
-                //s.AddRoom(h);
-                //}
                 // to be done: remove the selected room(s) from its available room list and 'give' it to the guest and display a check-in successful message [2.1.5]
                 statusUpdateText.Text = "Status update: Rooms" + " " + roomscheckedin + "checked in successfully.";
                 roomscheckedin = "";
@@ -186,7 +181,14 @@ namespace PRG2Assignment
                     HotelRoom r = tempRoomList[i];
                     r.IsAvail = false;
                     r.NoOfOccupants = Convert.ToInt32(noOfAdultTxt.Text) + Convert.ToInt32(noOfChildrentxt.Text);
-                    HotelRoom h = new StandardRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
+                    if (r.RoomType == "Standard")
+                    {
+                        HotelRoom h = new StandardRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
+                    }
+                    else if (r.RoomType == "Deluxe")
+                    {
+                        HotelRoom h = new DeluxeRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
+                    }
                     foreach (Guest g in guestList)
                     {
                         if (g.Name == guestTxt.Text)
@@ -270,7 +272,7 @@ namespace PRG2Assignment
 
         private void SearchBtn_Click(object sender, RoutedEventArgs e)
         {
-            string a = "";
+            //string a = "";
             availableTxt.Text = "Available rooms:";
             lvAvailableRooms.ItemsSource = null;
             invoiceText.Text = "";
@@ -281,7 +283,7 @@ namespace PRG2Assignment
                 {
                     if (guest.Name == guestTxt.Text && passportTxt.Text == "")
                     {
-                        availableTxt.Text = "Rooms Booked by: " + guest.Name + " (" + guest.PPNumber + ")\n" + "Check In: " + guest.HotelStay.CheckInDate + " Check Out: " + guest.HotelStay.CheckOutDate;
+                        availableTxt.Text = "Rooms Booked by: " + guest.Name + " (" + guest.PPNumber + ")\nMembership: " + guest.Membership.Status + "\t" + "Check In: " + guest.HotelStay.CheckInDate + " Check Out: " + guest.HotelStay.CheckOutDate;
                         lvAvailableRooms.ItemsSource = guest.HotelStay.RoomList;
                         //double test = guest.HotelStay.RoomList[0].
                         double totalrate = guest.HotelStay.RoomList[0].CalculateCharges();
