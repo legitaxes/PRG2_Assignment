@@ -184,16 +184,23 @@ namespace PRG2Assignment
                     if (r.RoomType == "Standard")
                     {
                         HotelRoom h = new StandardRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
+                        foreach (Guest g in guestList)
+                        {
+                            if (g.Name == guestTxt.Text)
+                            {
+                                g.HotelStay.AddRoom(h);
+                            }
+                        }
                     }
                     else if (r.RoomType == "Deluxe")
                     {
                         HotelRoom h = new DeluxeRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
-                    }
-                    foreach (Guest g in guestList)
-                    {
-                        if (g.Name == guestTxt.Text)
+                        foreach (Guest g in guestList)
                         {
-                            g.HotelStay.AddRoom(h);
+                            if (g.Name == guestTxt.Text)
+                            {
+                                g.HotelStay.AddRoom(h);
+                            }
                         }
                     }
                     //List<HotelRoom> roomList = g.HotelStay.RoomList;
