@@ -428,8 +428,8 @@ namespace PRG2Assignment
             {
                 if (g.Name == guestTxt.Text || g.PPNumber == passportTxt.Text)
                 {
-                    g.HotelStay.RoomList.Clear();
-                    for (int i = 0; i < g.HotelStay.RoomList.Count(); i++)
+                    //g.HotelStay.RoomList.Clear();
+                    for (int i = 0; i < g.HotelStay.RoomList.Count; i++)
                     {
                         if (g.HotelStay.RoomList[i].RoomType == "Standard")
                         {
@@ -437,17 +437,78 @@ namespace PRG2Assignment
                             sr.RequireWifi = false;
                             sr.RequireBreakfast = false;
                             sr.IsAvail = true;
-                            RefreshList();
+                            double totalrate = g.HotelStay.RoomList[i].CalculateCharges();
+                            double totalamount = g.HotelStay.CalculateTotal(totalrate);
+                            double points = totalamount / 10;
+                            invoiceText.Text = "Thank you for staying with us!\n You have earned " + Math.Round(points,1) + " points\nIt will be credited to your account.";
+                            statusUpdateText.Text = "Check-Out Successful!";
+                            double totalpoints = g.Membership.Points + points;
+                            if (g.Membership.Status == "Ordinary")
+                            {
+                                if (totalpoints >= 200)
+                                {
+                                    Membership m = new Membership("Gold", Convert.ToInt32(totalpoints));
+                                    g.Membership = m;
+                                }
+                                else if (totalpoints >= 100)
+                                {
+                                    Membership m = new Membership("Silver", Convert.ToInt32(totalpoints));
+                                    g.Membership = m;
+                                }
+                            }
+                            else if (g.Membership.Status == "Silver")
+                            {
+                                if (totalpoints >= 200)
+                                {
+                                    Membership m = new Membership("Gold", Convert.ToInt32(totalpoints));
+                                    g.Membership = m;
+                                }
+                            }
+                            memberStatusText.Text = "Member Status: " + g.Membership.Status;
+                            pointsAvailableText.Text = "Available Points: " + Convert.ToString(totalpoints);
+                            g.Membership.EarnPoints(totalamount);
+                            g.HotelStay.RoomList.Remove(sr);
                         }
 
-                        if (g.HotelStay.RoomList[i].RoomType == "Deluxe")
+                        else if (g.HotelStay.RoomList[i].RoomType == "Deluxe")
                         {
                             DeluxeRoom dr = (DeluxeRoom)g.HotelStay.RoomList[i];
                             dr.AdditionalBed = false;
                             dr.IsAvail = true;
-                            RefreshList();
+                            double totalrate = g.HotelStay.RoomList[i].CalculateCharges();
+                            double totalamount = g.HotelStay.CalculateTotal(totalrate);
+                            double points = totalamount / 10;
+                            invoiceText.Text = "Thank you for staying with us!\n You have earned " + Math.Round(points, 1) + " points\nIt will be credited to your account.";
+                            statusUpdateText.Text = "Check-Out Successful!";
+                            double totalpoints = g.Membership.Points + points;
+                            if (g.Membership.Status == "Ordinary")
+                            {
+                                if (totalpoints >= 200)
+                                {
+                                    Membership m = new Membership("Gold", Convert.ToInt32(totalpoints));
+                                    g.Membership = m;
+                                }
+                                else if (totalpoints >= 100)
+                                {
+                                    Membership m = new Membership("Silver", Convert.ToInt32(totalpoints));
+                                    g.Membership = m;
+                                }
+                            }
+                            else if (g.Membership.Status == "Silver")
+                            {
+                                if (totalpoints >= 200)
+                                {
+                                    Membership m = new Membership("Gold", Convert.ToInt32(totalpoints));
+                                    g.Membership = m;
+                                }
+                            }
+                            memberStatusText.Text = "Member Status: " + g.Membership.Status;
+                            pointsAvailableText.Text = "Available Points: " + Convert.ToString(totalpoints);
+                            g.Membership.EarnPoints(totalamount);
+                            g.HotelStay.RoomList.Remove(dr);
                         }
                     }
+                    lvAvailableRooms.ItemsSource = null;
                 }
             }
         }
