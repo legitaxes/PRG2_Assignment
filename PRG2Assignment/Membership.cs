@@ -33,12 +33,18 @@ namespace PRG2Assignment
 
         public void EarnPoints(double p) //Left as void and blank as it will be done later
         {
-           
+            double points = p / 10;
         }
 
         public bool RedeemPoints(int p)
         {
-            return false;
+            if (status != "Silver" || status != "Gold")
+            {
+                return false;
+            }
+            else {
+                return true;
+            }
         }
 
         public override string ToString()
