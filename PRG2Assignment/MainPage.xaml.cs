@@ -538,7 +538,6 @@ namespace PRG2Assignment
                     availableTxt.Text = "Rooms Booked by: " + guest.Name + " (" + guest.PPNumber + ")\n" + "Check In: " + guest.HotelStay.CheckInDate + " Check Out: " + guest.HotelStay.CheckOutDate;
                     foreach(HotelRoom room in (List<HotelRoom>)lvAvailableRooms.ItemsSource)
                     {
-                        room.
                     }
                 }
             }
