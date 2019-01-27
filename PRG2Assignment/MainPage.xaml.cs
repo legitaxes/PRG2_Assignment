@@ -129,80 +129,87 @@ namespace PRG2Assignment
                     check = true;
                 }
             }
-            if (check == true)
+            if (passportTxt.Text == "" | passportTxt.Text == " ") //checks whether passport number is empty
             {
-                Stay s = new Stay(DateTime.Parse(checkInDatePicker.Date.ToString()), DateTime.Parse(checkOutDatePicker.Date.ToString())); //get datestart and dateend
-                Membership m = new Membership("Ordinary", 0);
-                Guest guest = new Guest(guestTxt.Text, passportTxt.Text, s, m, false); //create guest info 1:1
-                guestList.Add(guest); //add into guestList
-                string roomscheckedin = "";
-                for (var i = 0; i < tempRoomList.Count; i++)
-                {
-                    HotelRoom r = tempRoomList[i];
-                    r.IsAvail = false;
-                    r.NoOfOccupants = Convert.ToInt32(noOfAdultTxt.Text) + Convert.ToInt32(noOfChildrentxt.Text);
-                    if (r.RoomType == "Standard")
-                    {
-                        HotelRoom h = new StandardRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
-                        s.AddRoom(h);
-                    }
-                    else if (r.RoomType == "Deluxe")
-                    {
-                        HotelRoom h = new DeluxeRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
-                        s.AddRoom(h);
-                    }
-                    List<HotelRoom> roomList = s.RoomList;
-                    Debug.WriteLine(roomList[0]);
-                    string guestStayDetails = "";
-                    foreach (HotelRoom room in roomList)
-                    {
-                        guestStayDetails += room.ToString() + guest.ToString();
-                    }
-                    roomsBookedTxt.Text = guestStayDetails;
-                    roomscheckedin += r.RoomNumber.ToString() + " ";
-                }
-                tempRoomList.Clear(); //clears the selected room list
-                RefreshList(); //refreshes room list
-                // to be done: remove the selected room(s) from its available room list and 'give' it to the guest and display a check-in successful message [2.1.5]
-                statusUpdateText.Text = "Status update: Rooms" + " " + roomscheckedin + "checked in successfully.";
-                roomscheckedin = "";
+                statusUpdateText.Text = "Please Enter Your Passport Number";
+                return;
             }
-            else if (check == false) //existing guest code goes here
+            else
             {
-                for (var i = 0; i < tempRoomList.Count; i++)
+                if (check == true)
                 {
-                    HotelRoom r = tempRoomList[i];
-                    Debug.WriteLine(r);
-                    r.IsAvail = false;
-                    r.NoOfOccupants = Convert.ToInt32(noOfAdultTxt.Text) + Convert.ToInt32(noOfChildrentxt.Text);
-                    if (r.RoomType == "Standard")
+                    Stay s = new Stay(DateTime.Parse(checkInDatePicker.Date.ToString()), DateTime.Parse(checkOutDatePicker.Date.ToString())); //get datestart and dateend
+                    Membership m = new Membership("Ordinary", 0);
+                    Guest guest = new Guest(guestTxt.Text, passportTxt.Text, s, m, false); //create guest info 1:1
+                    guestList.Add(guest); //add into guestList
+                    string roomscheckedin = "";
+                    for (var i = 0; i < tempRoomList.Count; i++)
                     {
-                        HotelRoom h = new StandardRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
-                        Debug.WriteLine(h);
-                        foreach (Guest g in guestList)
+                        HotelRoom r = tempRoomList[i];
+                        r.IsAvail = false;
+                        r.NoOfOccupants = Convert.ToInt32(noOfAdultTxt.Text) + Convert.ToInt32(noOfChildrentxt.Text);
+                        if (r.RoomType == "Standard")
                         {
-                            if (g.Name == guestTxt.Text)
+                            HotelRoom h = new StandardRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
+                            s.AddRoom(h);
+                        }
+                        else if (r.RoomType == "Deluxe")
+                        {
+                            HotelRoom h = new DeluxeRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
+                            s.AddRoom(h);
+                        }
+                        List<HotelRoom> roomList = s.RoomList;
+                        Debug.WriteLine(roomList[0]);
+                        string guestStayDetails = "";
+                        foreach (HotelRoom room in roomList)
+                        {
+                            guestStayDetails += room.ToString() + guest.ToString();
+                        }
+                        roomsBookedTxt.Text = guestStayDetails;
+                        roomscheckedin += r.RoomNumber.ToString() + " ";
+                    }
+                    tempRoomList.Clear(); //clears the selected room list
+                    RefreshList(); //refreshes room list
+                                   // to be done: remove the selected room(s) from its available room list and 'give' it to the guest and display a check-in successful message [2.1.5]
+                    statusUpdateText.Text = "Status update: Rooms" + " " + roomscheckedin + "checked in successfully.";
+                    roomscheckedin = "";
+                }
+                else if (check == false) //existing guest code goes here
+                {
+                    for (var i = 0; i < tempRoomList.Count; i++)
+                    {
+                        HotelRoom r = tempRoomList[i];
+                        Debug.WriteLine(r);
+                        r.IsAvail = false;
+                        r.NoOfOccupants = Convert.ToInt32(noOfAdultTxt.Text) + Convert.ToInt32(noOfChildrentxt.Text);
+                        if (r.RoomType == "Standard")
+                        {
+                            HotelRoom h = new StandardRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
+                            Debug.WriteLine(h);
+                            foreach (Guest g in guestList)
                             {
-                                g.HotelStay.AddRoom(h);
+                                if (g.Name == guestTxt.Text)
+                                {
+                                    g.HotelStay.AddRoom(h);
+                                }
                             }
                         }
-                    }
-                    else if (r.RoomType == "Deluxe")
-                    {
-                        HotelRoom h = new DeluxeRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
-                        foreach (Guest g in guestList)
+                        else if (r.RoomType == "Deluxe")
                         {
-                            if (g.Name == guestTxt.Text)
+                            HotelRoom h = new DeluxeRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
+                            foreach (Guest g in guestList)
                             {
-                                g.HotelStay.AddRoom(h);
+                                if (g.Name == guestTxt.Text)
+                                {
+                                    g.HotelStay.AddRoom(h);
+                                }
                             }
                         }
+                        //List<HotelRoom> roomList = g.HotelStay.RoomList;
                     }
-                    //List<HotelRoom> roomList = g.HotelStay.RoomList;
                 }
                 //put a message by welcoming the user back and 'give' the selected room(s) to this guest and display another message saying check -in is successful[2.1.6]
             }
-           
         }
 
         private void addRoomBtn_Click(object sender, RoutedEventArgs e)
@@ -363,7 +370,7 @@ namespace PRG2Assignment
                                 double totalamount = guest.HotelStay.CalculateTotal(totalrate);
                                 double totaldays = totalamount / totalrate;
                                 double roomNumber = Convert.ToDouble(guest.HotelStay.RoomList[i].RoomNumber);
-                                result += "You are staying for " + totaldays + " nights in room number " + roomNumber + " Wifi addon: " + checkwifi + " Breakfast addon: " + checkbreakfast + " and the total amount is " + totalamount + "\n";
+                                result += "You are staying for " + totaldays + " nights in room number " + roomNumber + "\nWifi addon: " + checkwifi + "\nBreakfast addon: " + checkbreakfast + "\nTotal amount is " + totalamount + "\n";
                             }
 
                             if (guest.HotelStay.RoomList[i].RoomType == "Deluxe")
@@ -374,7 +381,7 @@ namespace PRG2Assignment
                                 double totalamount = guest.HotelStay.CalculateTotal(totalrate);
                                 double totaldays = totalamount / totalrate;
                                 double roomNumber = Convert.ToDouble(guest.HotelStay.RoomList[i].RoomNumber);
-                                result += "You are staying for " + totaldays + " nights in room number " + roomNumber + " Additional bed " + checkbed + " and the total amount is " + totalamount + "\n";
+                                result += "You are staying for " + totaldays + " nights in room number " + roomNumber + "\nAdditional bed " + checkbed + "\nTotal amount is " + totalamount + "\n";
                             }
                         }
                     }
@@ -399,7 +406,7 @@ namespace PRG2Assignment
                                 double totalamount = guest.HotelStay.CalculateTotal(totalrate);
                                 double totaldays = totalamount / totalrate;
                                 double roomNumber = Convert.ToDouble(guest.HotelStay.RoomList[i].RoomNumber);
-                                result += "You are staying for " + totaldays + " nights in room number " + roomNumber + " Wifi addon: " + checkwifi + " Breakfast addon: " + checkbreakfast + " and the total amount is " + totalamount + "\n";
+                                result += "You are staying for " + totaldays + " nights in room number " + roomNumber + "\nWifi addon: " + checkwifi + "\nBreakfast addon: " + checkbreakfast + "\nTotal amount is " + totalamount + "\n";
                             }
 
                             if (guest.HotelStay.RoomList[i].RoomType == "Deluxe")
@@ -410,7 +417,7 @@ namespace PRG2Assignment
                                 double totalamount = guest.HotelStay.CalculateTotal(totalrate);
                                 double totaldays = totalamount / totalrate;
                                 double roomNumber = Convert.ToDouble(guest.HotelStay.RoomList[i].RoomNumber);
-                                result += "You are staying for " + totaldays + " nights in room number " + roomNumber + " Additional bed " + checkbed + " and the total amount is " + totalamount + "\n";
+                                result += "You are staying for " + totaldays + " nights in room number " + roomNumber + "\nAdditional bed " + checkbed + "\nTotal amount is " + totalamount + "\n";
                             }
                         }
                     }
@@ -435,7 +442,6 @@ namespace PRG2Assignment
             {
                 if (g.Name == guestTxt.Text || g.PPNumber == passportTxt.Text)
                 {
-                    //g.HotelStay.RoomList.Clear();
                     for (int i = 0; i < g.HotelStay.RoomList.Count; i++)
                     {
                         if (g.HotelStay.RoomList[i].RoomType == "Standard")
@@ -444,10 +450,10 @@ namespace PRG2Assignment
                             sr.RequireWifi = false;
                             sr.RequireBreakfast = false;
                             sr.IsAvail = true;
-                            double totalrate = g.HotelStay.RoomList[i].CalculateCharges();
+                            double totalrate = sr.CalculateCharges();
                             double totalamount = g.HotelStay.CalculateTotal(totalrate);
                             double points = totalamount / 10;
-                            invoiceText.Text = "Thank you for staying with us!\n You have earned " + Math.Round(points,1) + " points\nIt will be credited to your account.";
+                            invoiceText.Text = "Thank you for staying with us!\n You have earned " + Math.Round(points, 1) + " points\nIt will be credited to your account.";
                             statusUpdateText.Text = "Check-Out Successful!";
                             double totalpoints = g.Membership.Points + points;
                             if (g.Membership.Status == "Ordinary")
@@ -475,6 +481,7 @@ namespace PRG2Assignment
                             pointsAvailableText.Text = "Available Points: " + Convert.ToString(totalpoints);
                             g.Membership.EarnPoints(totalamount);
                             g.HotelStay.RoomList.Remove(sr);
+                            availableRooms.Add(sr);
                         }
 
                         else if (g.HotelStay.RoomList[i].RoomType == "Deluxe")
@@ -513,9 +520,10 @@ namespace PRG2Assignment
                             pointsAvailableText.Text = "Available Points: " + Convert.ToString(totalpoints);
                             g.Membership.EarnPoints(totalamount);
                             g.HotelStay.RoomList.Remove(dr);
+                            availableRooms.Add(dr);
                         }
                     }
-                    lvAvailableRooms.ItemsSource = null;
+                    lvAvailableRooms.ItemsSource = g.HotelStay.RoomList;
                 }
             }
         }
@@ -528,6 +536,10 @@ namespace PRG2Assignment
                 {
                     guest.HotelStay.CheckOutDate = guest.HotelStay.CheckOutDate.AddDays(1); //add one day to the checkoutDate [3.3]
                     availableTxt.Text = "Rooms Booked by: " + guest.Name + " (" + guest.PPNumber + ")\n" + "Check In: " + guest.HotelStay.CheckInDate + " Check Out: " + guest.HotelStay.CheckOutDate;
+                    foreach(HotelRoom room in (List<HotelRoom>)lvAvailableRooms.ItemsSource)
+                    {
+                        room.
+                    }
                 }
             }
         }
