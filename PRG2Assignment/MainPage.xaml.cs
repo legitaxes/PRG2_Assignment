@@ -144,12 +144,13 @@ namespace PRG2Assignment
                     if (r.RoomType == "Standard")
                     {
                         HotelRoom h = new StandardRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
+                        s.AddRoom(h);
                     }
                     else if (r.RoomType == "Deluxe")
                     {
                         HotelRoom h = new DeluxeRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
+                        s.AddRoom(h);
                     }
-                    s.AddRoom(h);
                     List<HotelRoom> roomList = s.RoomList;
                     Debug.WriteLine(roomList[0]);
                     string guestStayDetails = "";
@@ -290,7 +291,7 @@ namespace PRG2Assignment
                 {
                     if (guest.Name == guestTxt.Text && passportTxt.Text == "")
                     {
-                        availableTxt.Text = "Rooms Booked by: " + guest.Name + " (" + guest.PPNumber + ")\nMembership: " + guest.Membership.Status + "\t" + "Check In: " + guest.HotelStay.CheckInDate + " Check Out: " + guest.HotelStay.CheckOutDate;
+                        availableTxt.Text = "Rooms Booked by: " + guest.Name + " (" + guest.PPNumber + ")\nMembership: " + guest.Membership.Status + "\n" + "Check In: " + guest.HotelStay.CheckInDate + " Check Out: " + guest.HotelStay.CheckOutDate;
                         lvAvailableRooms.ItemsSource = guest.HotelStay.RoomList;
                         //double test = guest.HotelStay.RoomList[0].
                         double totalrate = guest.HotelStay.RoomList[0].CalculateCharges();
