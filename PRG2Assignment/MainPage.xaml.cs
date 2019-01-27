@@ -379,7 +379,7 @@ namespace PRG2Assignment
                                 double days = (guest.HotelStay.CheckOutDate - guest.HotelStay.CheckInDate).TotalDays;
                                 double totalcost = guest.HotelStay.CalculateTotal();
                                 double roomNumber = Convert.ToDouble(h.RoomNumber);
-                                result += "You are staying for " + days + " nights in room number " + roomNumber + " Wifi addon: " + checkwifi + " Breakfast addon: " + checkbreakfast + " and the total amount is " + totalcost + "\n";
+                                result += "You are staying for " + days + " nights in room number " + roomNumber + "\nWifi addon: " + checkwifi + "\tBreakfast addon: " + checkbreakfast + "\tTotal amount is $" + totalcost + "\n";
                                 //noOfAdultTxt.Text = sr.RequireWifi.ToString();
                             }
 
@@ -390,7 +390,7 @@ namespace PRG2Assignment
                                 double days = (guest.HotelStay.CheckOutDate - guest.HotelStay.CheckInDate).TotalDays;
                                 double totalcost = guest.HotelStay.CalculateTotal();
                                 double roomNumber = Convert.ToDouble(h.RoomNumber);
-                                result += "You are staying for " + days + " nights in room number " + roomNumber + " Additional Bed " + checkbed + " and the total amount is " + totalcost + "\n";
+                                result += "You are staying for " + days + " nights in room number " + roomNumber + "\nAdditional Bed " + checkbed + "\tTotal amount is $" + totalcost + "\n";
                             }
                         }                                        
                     }
@@ -408,7 +408,7 @@ namespace PRG2Assignment
                                 double days = (guest.HotelStay.CheckOutDate - guest.HotelStay.CheckInDate).TotalDays;
                                 double totalcost = guest.HotelStay.CalculateTotal();
                                 double roomNumber = Convert.ToDouble(h.RoomNumber);
-                                result += "You are staying for " + days + " nights in room number " + roomNumber + " Wifi addon: " + checkwifi + " Breakfast addon: " + checkbreakfast + " and the total amount is " + totalcost + "\n";
+                                result += "You are staying for " + days + " nights in room number " + roomNumber + "\nWifi addon: " + checkwifi + "\tBreakfast addon: " + checkbreakfast + "\tTotal amount is $" + totalcost + "\n";
                             }
 
                             else if (h.RoomType == "Deluxe")
@@ -418,7 +418,7 @@ namespace PRG2Assignment
                                 double days = (guest.HotelStay.CheckOutDate - guest.HotelStay.CheckInDate).TotalDays;
                                 double totalcost = guest.HotelStay.CalculateTotal();
                                 double roomNumber = Convert.ToDouble(h.RoomNumber);
-                                result += "You are staying for " + days + " nights in room number " + roomNumber + " Additional Bed " + checkbed + " and the total amount is " + totalcost + "\n";
+                                result += "You are staying for " + days + " nights in room number " + roomNumber + "\nAdditional Bed " + checkbed + "\tTotal amount is $" + totalcost + "\n";
                             }
                         }
                     }
@@ -528,14 +528,36 @@ namespace PRG2Assignment
 
         private void extendStayBtn_Click(object sender, RoutedEventArgs e)
         {
+            string result = "";
             foreach (Guest guest in guestList)
             {
                 if (guest.Name == guestTxt.Text)
                 {
                     guest.HotelStay.CheckOutDate = guest.HotelStay.CheckOutDate.AddDays(1); //add one day to the checkoutDate [3.3]
                     availableTxt.Text = "Rooms Booked by: " + guest.Name + " (" + guest.PPNumber + ")\n" + "Check In: " + guest.HotelStay.CheckInDate + " Check Out: " + guest.HotelStay.CheckOutDate;
-                    foreach(HotelRoom room in (List<HotelRoom>)lvAvailableRooms.ItemsSource)
+                    foreach(HotelRoom room in guest.HotelStay.RoomList)
                     {
+                        if (room.RoomType == "Standard")
+                        {
+                            StandardRoom sr = (StandardRoom)room;
+                            bool checkwifi = sr.RequireWifi;
+                            bool checkbreakfast = sr.RequireBreakfast;
+                            double days = (guest.HotelStay.CheckOutDate - guest.HotelStay.CheckInDate).TotalDays;
+                            Debug.WriteLine(days);
+                            double totalcost = guest.HotelStay.CalculateTotal();
+                            double roomNumber = Convert.ToInt32(room.RoomNumber);
+                            result = "You are staying for " + days + " nights in room number " + roomNumber + "\nWifi addon: " + checkwifi + "\tBreakfast addon: " + checkbreakfast + "\tTotal amount is $" + totalcost + "\n";
+                        }
+                        else if (room.RoomType == "Deluxe")
+                        {
+                            DeluxeRoom dr = (DeluxeRoom)room;
+                            bool checkbed = dr.AdditionalBed;
+                            double days = (guest.HotelStay.CheckOutDate - guest.HotelStay.CheckInDate).TotalDays;
+                            double totalcost = guest.HotelStay.CalculateTotal();
+                            double roomNumber = Convert.ToInt32(room.RoomNumber);
+                            result = "You are staying for " + days + " nights in room number " + roomNumber + "\nAdditional Bed " + checkbed + "\nTotal amount is $" + totalcost + "\n";
+                        }
+                        invoiceText.Text = result;
                     }
                 }
             }

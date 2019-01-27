@@ -46,7 +46,7 @@ namespace PRG2Assignment
         public double CalculateTotal() //Empty for now so its left as a void
         {
             double total = 0;
-            double days = (CheckOutDate - CheckInDate).TotalDays;
+            double days = (checkOutDate - checkInDate).TotalDays;
             foreach (HotelRoom room in RoomList)
             {
                 total += room.CalculateCharges() * days;

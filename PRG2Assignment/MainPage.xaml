@@ -40,7 +40,7 @@
         <TextBlock x:Name="pointsAvailableText" HorizontalAlignment="Left" Margin="1154,94,0,0" TextWrapping="Wrap" Text="Points Available:" VerticalAlignment="Top"/>
         <Button x:Name="redeemPointsBtn" Content="Redeem Points" HorizontalAlignment="Left" Margin="1292,141,0,0" VerticalAlignment="Top" Height="50" Width="124"/>
         <TextBox x:Name="pointsTxt" HorizontalAlignment="Left" Margin="1154,141,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="93" Height="50"/>
-        <TextBlock x:Name="invoiceText" HorizontalAlignment="Left" Margin="1138,210,0,0" TextWrapping="Wrap" Text="Invoice: " VerticalAlignment="Top" Width="278" Height="79"/>
+        <TextBlock x:Name="invoiceText" HorizontalAlignment="Left" Margin="1062,210,0,0" TextWrapping="Wrap" Text="Invoice: " VerticalAlignment="Top" Width="278" Height="263"/>
         <Button x:Name="checkOutBtn" Content="Check-Out" HorizontalAlignment="Left" Margin="1207,581,0,0" VerticalAlignment="Top" Width="209" Height="70" Click="CheckOutBtn_Click"/>
         <TextBox x:Name="noOfAdultTxt" HorizontalAlignment="Left" Margin="294,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="28" Height="50"/>
         <TextBox x:Name="noOfChildrentxt" HorizontalAlignment="Left" Margin="294,176,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="28" Height="50"/>
