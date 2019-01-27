@@ -31,7 +31,6 @@ namespace PRG2Assignment
 
             return total; //temporary return value until we actually do the method
 
-
         }
 
         public override string ToString()

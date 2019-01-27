@@ -144,6 +144,8 @@ namespace PRG2Assignment
                     HotelRoom h = new StandardRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
                     s.AddRoom(h);
                     List<HotelRoom> roomList = s.RoomList;
+                    Debug.WriteLine(roomList[0]);
+                    //Debug.WriteLine(roomList[1]);
                     string guestStayDetails = "";
                     foreach (HotelRoom room in roomList)
                     {
@@ -152,8 +154,9 @@ namespace PRG2Assignment
                     roomsBookedTxt.Text = guestStayDetails;
                     roomscheckedin += r.RoomNumber.ToString() + " ";
                 }
-                tempRoomList.Clear();
-                RefreshList();
+                tempRoomList.Clear(); //clears the selected room list
+                RefreshList(); //refreshes room list
+
                 //if (r.RoomType == "Standard")                                  
                 //{    
                 //}
@@ -316,7 +319,7 @@ namespace PRG2Assignment
             {
                 if (guest.Name == guestTxt.Text)
                 {
-                    guest.HotelStay.CheckOutDate = guest.HotelStay.CheckOutDate.AddDays(1);
+                    guest.HotelStay.CheckOutDate = guest.HotelStay.CheckOutDate.AddDays(1); //add one day to the checkoutDate [3.3]
                     availableTxt.Text = "Rooms Booked by: " + guest.Name + " (" + guest.PPNumber + ")\n" + "Check In: " + guest.HotelStay.CheckInDate + " Check Out: " + guest.HotelStay.CheckOutDate;
                 }
             }
