@@ -143,16 +143,16 @@ namespace PRG2Assignment
                     r.NoOfOccupants = Convert.ToInt32(noOfAdultTxt.Text) + Convert.ToInt32(noOfChildrentxt.Text);
                     HotelRoom h = new StandardRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
                     s.AddRoom(h);
-                    List<HotelRoom> roomList = s.RoomList;
-                    Debug.WriteLine(roomList[0]);
+                    //List<HotelRoom> roomList = s.RoomList;
+                    //Debug.WriteLine(roomList[0]);
                     //Debug.WriteLine(roomList[1]);
-                    string guestStayDetails = "";
-                    foreach (HotelRoom room in roomList)
-                    {
-                        guestStayDetails += room.ToString() + guest.ToString();
-                    }
-                    roomsBookedTxt.Text = guestStayDetails;
-                    roomscheckedin += r.RoomNumber.ToString() + " ";
+                    //string guestStayDetails = "";
+                    //foreach (HotelRoom room in roomList)
+                    //{
+                    //    guestStayDetails += room.ToString() + guest.ToString();
+                    //}
+                    //roomsBookedTxt.Text = guestStayDetails;
+                    //roomscheckedin += r.RoomNumber.ToString() + " ";
                 }
                 tempRoomList.Clear(); //clears the selected room list
                 RefreshList(); //refreshes room list
@@ -171,24 +171,30 @@ namespace PRG2Assignment
                 statusUpdateText.Text = "Status update: Rooms" + " " + roomscheckedin + "checked in successfully.";
                 roomscheckedin = "";
             }
+
             else if (check == false) //existing guest code goes here
             {
-                Stay s = new Stay(DateTime.Parse(checkInDatePicker.Date.ToString()), DateTime.Parse(checkOutDatePicker.Date.ToString())); //get datestart and dateend
-                foreach (Guest g in guestList)
-                {
-                    if (g.Name == guestTxt.Text)
-                    {
-                        g.HotelStay = s; //puts the check-in date for the existing guest
-                    }
-                }
+                //foreach (Guest g in guestList)
+                //{
+                //    if (g.Name == guestTxt.Text)
+                //    {
+                //        //g.HotelStay = s; //puts the check-in date for the existing guest
+                //    }
+                //}
                 for (var i = 0; i < tempRoomList.Count; i++)
                 {
                     HotelRoom r = tempRoomList[i];
                     r.IsAvail = false;
                     r.NoOfOccupants = Convert.ToInt32(noOfAdultTxt.Text) + Convert.ToInt32(noOfChildrentxt.Text);
                     HotelRoom h = new StandardRoom(r.RoomType, r.RoomNumber, r.BedConfiguration, r.DailyRate, r.IsAvail, r.NoOfOccupants);
-                    s.AddRoom(h);
-                    List<HotelRoom> roomList = s.RoomList;
+                    foreach (Guest g in guestList)
+                    {
+                        if (g.Name == guestTxt.Text)
+                        {
+                            g.HotelStay.AddRoom(h);
+                        }
+                    }
+                    //List<HotelRoom> roomList = g.HotelStay.RoomList;
                 }
                 //put a message by welcoming the user back and 'give' the selected room(s) to this guest and display another message saying check-in is successful [2.1.6]
             }
