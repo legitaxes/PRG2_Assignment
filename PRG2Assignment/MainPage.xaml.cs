@@ -253,61 +253,34 @@ namespace PRG2Assignment
 
         private void addRoomBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (lvAvailableRooms.SelectedItem != null) //ensures an item is selected
+            double p = 0;
+            HotelRoom r = (HotelRoom)lvAvailableRooms.SelectedItem;
+            if (r.RoomType == "Standard") //check for standard or deluxe and allow which checkbox to be checked [2.1.3]
             {
-                HotelRoom r = (HotelRoom)lvAvailableRooms.SelectedItem;
-                r.IsAvail = false;
-
-                if (r.RoomType == "Standard") //check for standard or deluxe and allow which checkbox to be checked [2.1.3]
+                if (addWifiCheckBox.IsChecked == true)
                 {
-                    StandardRoom sr = (StandardRoom)r;
-                    if (addWifiCheckBox.IsChecked == true && addBreakfastCheckBox.IsChecked == false)
-                    {
-                        sr.RequireWifi = true;
-                        sr.RequireBreakfast = false;
-                        sr.DailyRate += 10;
-                        tempRoomList.Add(sr);
-                    }
-
-                   else if (addBreakfastCheckBox.IsChecked == true && addWifiCheckBox.IsChecked == false)
-                    {
-                        sr.RequireBreakfast = true;
-                        sr.RequireWifi = false;
-                        sr.DailyRate += 20;
-                        tempRoomList.Add(sr);
-                    }
-
-                    else if (addBreakfastCheckBox.IsChecked == true && addWifiCheckBox.IsChecked == true)
-                    {
-                        sr.RequireWifi = true;
-                        sr.RequireBreakfast = true;
-                        sr.DailyRate += 30;
-                        tempRoomList.Add(sr);
-                        
-                    }
-
-                    else if (addBreakfastCheckBox.IsChecked == false && addWifiCheckBox.IsChecked == false)
-                    {
-                        tempRoomList.Add(sr);
-                    }
+                    p += 10;
                 }
-                else if (r.RoomType == "Deluxe")
+                if (addBreakfastCheckBox.IsChecked == true)
                 {
-                    DeluxeRoom dr = (DeluxeRoom)r;
-                    if (addBedCheckBox.IsChecked == true)
-                    {
-                        dr.AdditionalBed = true;
-                        dr.DailyRate += 25;
-                        tempRoomList.Add(dr);
-                    }
-
-                    else if (addBedCheckBox.IsChecked == false)
-                    {
-                        tempRoomList.Add(dr);
-                    }
+                    p += 20;
                 }
-                RefreshList();
             }
+            else if (r.RoomType == "Deluxe")
+            {
+                if (addBedCheckBox.IsChecked == true)
+                {
+                    p = 25;
+                }
+            }
+            r.DailyRate += p;
+            r.IsAvail = false;
+            if (r.IsAvail == false)
+            {
+                availableRooms.Remove(r);
+            }
+            tempRoomList.Add(r);
+            RefreshList();
         }
 
         private void removeRoomBtn_Click(object sender, RoutedEventArgs e) //removes the selected room from the selected listview [2.1.4]
@@ -359,11 +332,13 @@ namespace PRG2Assignment
             string result = "";
             lvAvailableRooms.ItemsSource = null;
             lvAvailableRooms.Items.Clear();
+            string checkwifi = "";
+            string checkbreakfast = "";
             if (guestTxt.Text != "" || guestTxt.Text != " " || passportTxt.Text != "" || passportTxt.Text != " ")
             {
                 foreach (Guest guest in guestList)
                 {
-                    if (guest.Name == guestTxt.Text && passportTxt.Text == "")
+                    if (guest.Name == guestTxt.Text || guest.PPNumber == passportTxt.Text)
                     {
                         availableTxt.Text = "Rooms Booked by: " + guest.Name + " (" + guest.PPNumber + ")\n" + "Check In: " + guest.HotelStay.CheckInDate + " Check Out: " + guest.HotelStay.CheckOutDate;
                         memberStatusText.Text = "Member Status: " + guest.Membership.Status;
@@ -374,8 +349,15 @@ namespace PRG2Assignment
                             if (h.RoomType == "Standard")
                             {
                                 StandardRoom sr = (StandardRoom)h;
-                                bool checkwifi = sr.RequireWifi;
-                                bool checkbreakfast = sr.RequireBreakfast;
+                                if (sr.RequireWifi == true)
+                                {
+                                    checkwifi = "Yes";
+                                }
+
+                                if (sr.RequireBreakfast == true)
+                                {
+                                    checkbreakfast = "Yes";
+                                }
                                 double days = (guest.HotelStay.CheckOutDate - guest.HotelStay.CheckInDate).TotalDays;
                                 double totalcost = guest.HotelStay.CalculateTotal();
                                 double roomNumber = Convert.ToDouble(h.RoomNumber);
@@ -393,36 +375,7 @@ namespace PRG2Assignment
                                 result += "You are staying for " + days + " nights in room number " + roomNumber + "\nAdditional Bed " + checkbed + "\tTotal amount is $" + totalcost + "\n";
                             }
                         }                                        
-                    }
-
-                    if (guest.PPNumber == passportTxt.Text && guestTxt.Text == "")
-                    {
-                        foreach (HotelRoom h in guest.HotelStay.RoomList)
-                        {
-                            lvAvailableRooms.Items.Add(h);
-                            if (h.RoomType == "Standard")
-                            {
-                                StandardRoom sr = (StandardRoom)h;
-                                bool checkwifi = sr.RequireWifi;
-                                bool checkbreakfast = sr.RequireBreakfast;
-                                double days = (guest.HotelStay.CheckOutDate - guest.HotelStay.CheckInDate).TotalDays;
-                                double totalcost = guest.HotelStay.CalculateTotal();
-                                double roomNumber = Convert.ToDouble(h.RoomNumber);
-                                result += "You are staying for " + days + " nights in room number " + roomNumber + "\nWifi addon: " + checkwifi + "\tBreakfast addon: " + checkbreakfast + "\tTotal amount is $" + totalcost + "\n";
-                            }
-
-                            else if (h.RoomType == "Deluxe")
-                            {
-                                DeluxeRoom dr = (DeluxeRoom)h;
-                                bool checkbed = dr.AdditionalBed;
-                                double days = (guest.HotelStay.CheckOutDate - guest.HotelStay.CheckInDate).TotalDays;
-                                double totalcost = guest.HotelStay.CalculateTotal();
-                                double roomNumber = Convert.ToDouble(h.RoomNumber);
-                                result += "You are staying for " + days + " nights in room number " + roomNumber + "\nAdditional Bed " + checkbed + "\tTotal amount is $" + totalcost + "\n";
-                            }
-                        }
-                    }
-
+                    }               
                     if (guestTxt.Text != "" && passportTxt.Text != "")
                     {
                         availableTxt.Text = "Please search by one method only.";
