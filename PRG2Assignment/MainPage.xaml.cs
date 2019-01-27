@@ -299,8 +299,9 @@ namespace PRG2Assignment
                     if (guest.Name == guestTxt.Text && passportTxt.Text == "")
                     {
                         {
-                            availableTxt.Text = "Rooms Booked by: " + guest.Name + " (" + guest.PPNumber + ")\nMembership: " + guest.Membership.Status + "\n" + "Check In: " + guest.HotelStay.CheckInDate + " Check Out: " + guest.HotelStay.CheckOutDate;
-                             
+                            availableTxt.Text = "Rooms Booked by: " + guest.Name + " (" + guest.PPNumber + ")\n" + "Check In: " + guest.HotelStay.CheckInDate + " Check Out: " + guest.HotelStay.CheckOutDate;
+                            memberStatusText.Text = "Member Status: " + guest.Membership.Status;
+                            pointsAvailableText.Text = "Points Available: " + guest.Membership.Points;
                             lvAvailableRooms.ItemsSource = guest.HotelStay.RoomList;
                             for (var i = 0; i< guest.HotelStay.RoomList.Count; i ++)
                             {
@@ -334,6 +335,8 @@ namespace PRG2Assignment
                     if (guest.PPNumber == passportTxt.Text && guestTxt.Text == "")
                     {
                         availableTxt.Text = "Rooms Booked by: " + guest.Name + " (" + guest.PPNumber + ")\n" + "Check In: " + guest.HotelStay.CheckInDate + " Check Out: " + guest.HotelStay.CheckOutDate;
+                        memberStatusText.Text = "Member Status: " + guest.Membership.Status;
+                        pointsAvailableText.Text = "Points Available: " + guest.Membership.Points;
                         lvAvailableRooms.ItemsSource = guest.HotelStay.RoomList;
                         for (var i = 0; i < guest.HotelStay.RoomList.Count; i++)
                         {
