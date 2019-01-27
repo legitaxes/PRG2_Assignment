@@ -349,12 +349,12 @@ namespace PRG2Assignment
                             if (h.RoomType == "Standard")
                             {
                                 StandardRoom sr = (StandardRoom)h;
-                                if (sr.RequireWifi == true)
+                                if (addWifiCheckBox.IsChecked == true)
                                 {
                                     checkwifi = "Yes";
                                 }
 
-                                if (sr.RequireBreakfast == true)
+                                if (addBreakfastCheckBox.IsChecked == true)
                                 {
                                     checkbreakfast = "Yes";
                                 }
