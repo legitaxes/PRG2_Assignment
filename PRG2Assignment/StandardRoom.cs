@@ -29,7 +29,18 @@ namespace PRG2Assignment
 
         public override double CalculateCharges() //temporary return value until we actually do the method
         {
-            return 0; //temporary return value until we actually do the method
+            double total = DailyRate;
+
+            if (RequireWifi == true)
+            {
+                total += 10;
+            }
+
+            if (RequireBreakfast == true)
+            {
+                total += 20;
+            }
+            return total; //temporary return value until we actually do the method
         }
 
         public override string ToString()
