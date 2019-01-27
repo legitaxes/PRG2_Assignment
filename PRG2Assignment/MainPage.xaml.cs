@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Diagnostics;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -271,9 +272,9 @@ namespace PRG2Assignment
                 {
                     if (guest.Name == guestTxt.Text && passportTxt.Text == "")
                     {
-                        availableTxt.Text = "Below are the rooms booked by the guest\n\n" + guest.Name + "'s Booked Room | Guest Number: " + guest.PPNumber;
-                        lvAvailableRooms.ItemsSource = guest.HotelStay.RoomList;       
-                        double test = guest.HotelStay.RoomList[0].
+                        availableTxt.Text = "Rooms Booked by: " + guest.Name + " (" + guest.PPNumber + ")\n" + "Check In: " + guest.HotelStay.CheckInDate + " Check Out: " + guest.HotelStay.CheckOutDate;
+                        lvAvailableRooms.ItemsSource = guest.HotelStay.RoomList;
+                        //double test = guest.HotelStay.RoomList[0].
                         double totalrate = guest.HotelStay.RoomList[0].CalculateCharges();
                         double totalamount = guest.HotelStay.CalculateTotal(totalrate);
                         double totaldays = totalamount / totalrate;
@@ -283,7 +284,7 @@ namespace PRG2Assignment
 
                     if (guest.PPNumber == passportTxt.Text && guestTxt.Text == "")
                     {
-                        availableTxt.Text = "Below are the rooms booked by the guest\n" + guest.Name + "'s Booked Room | Guest Number: " + guest.PPNumber;
+                        availableTxt.Text = "Rooms Booked by: " + guest.Name + " (" + guest.PPNumber + ")\n" + "Check In: " + guest.HotelStay.CheckInDate + " Check Out: " + guest.HotelStay.CheckOutDate;
                         lvAvailableRooms.ItemsSource = guest.HotelStay.RoomList;
                         double totalrate = guest.HotelStay.RoomList[0].CalculateCharges();
                         double totalamount = guest.HotelStay.CalculateTotal(totalrate);
@@ -309,6 +310,16 @@ namespace PRG2Assignment
 
         }
 
-
+        private void extendStayBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (Guest guest in guestList)
+            {
+                if (guest.Name == guestTxt.Text)
+                {
+                    guest.HotelStay.CheckOutDate = guest.HotelStay.CheckOutDate.AddDays(1);
+                    availableTxt.Text = "Rooms Booked by: " + guest.Name + " (" + guest.PPNumber + ")\n" + "Check In: " + guest.HotelStay.CheckInDate + " Check Out: " + guest.HotelStay.CheckOutDate;
+                }
+            }
+        }
     }
 }
